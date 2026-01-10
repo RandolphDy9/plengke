@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Star } from "lucide-react";
+import { Sparkles, Star, Utensils, ShoppingBag, MapPin } from "lucide-react";
 
 const Hero: React.FC = () => {
   return (
@@ -91,12 +91,27 @@ const Hero: React.FC = () => {
               Welcome to <span className="text-[#fd5e02]">P&apos;LENGKE!</span>
             </motion.h1>
 
-            <p className="text-xl text-[#023341]/80 max-w-lg mx-auto md:mx-0 leading-relaxed">
-              From the crispiest{" "}
-              <strong className="text-[#fd5e02]">Lechon</strong> to your
-              favorite snacks from home. Authentic Filipino dishes and groceries
-              delivered with a smile.
-            </p>
+            <div className="space-y-4 max-w-lg mx-auto md:mx-0">
+              <p className="text-xl text-[#023341]/80 leading-relaxed">
+                Experience authentic Filipino cuisine and find all your favorite
+                ingredients from the Philippines, right here in the heart of
+                Montreal.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 text-[#023341]/70">
+                <div className="flex items-center gap-2">
+                  <Utensils className="text-[#fd5e02]" size={20} />
+                  <span className="text-sm font-medium">Restaurant</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShoppingBag className="text-[#fd5e02]" size={20} />
+                  <span className="text-sm font-medium">Grocery Store</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="text-[#fd5e02]" size={20} />
+                  <span className="text-sm font-medium">Montreal, QC 🇨🇦</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
