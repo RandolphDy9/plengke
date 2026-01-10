@@ -68,12 +68,6 @@ const Hero: React.FC = () => {
               }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <motion.span
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-              >
-                🇨🇦
-              </motion.span>
               Pamilihang Bayan ng Montreal
             </motion.span>
 
@@ -91,26 +85,12 @@ const Hero: React.FC = () => {
               Welcome to <span className="text-[#fd5e02]">P&apos;LENGKE!</span>
             </motion.h1>
 
-            <div className="space-y-4 max-w-lg mx-auto md:mx-0">
-              <p className="text-xl text-[#023341]/80 leading-relaxed">
+            <div className="space-y-4 sm:space-y-5 max-w-lg mx-auto md:mx-0">
+              <p className="text-base sm:text-lg md:text-xl text-[#023341]/80 leading-relaxed px-2 sm:px-0">
                 Experience authentic Filipino cuisine and find all your favorite
                 ingredients from the Philippines, right here in the heart of
-                Montreal.
+                Montreal. 🇨🇦 🇵🇭
               </p>
-              <div className="flex flex-wrap items-center gap-4 text-[#023341]/70">
-                <div className="flex items-center gap-2">
-                  <Utensils className="text-[#fd5e02]" size={20} />
-                  <span className="text-sm font-medium">Restaurant</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ShoppingBag className="text-[#fd5e02]" size={20} />
-                  <span className="text-sm font-medium">Grocery Store</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="text-[#fd5e02]" size={20} />
-                  <span className="text-sm font-medium">Montreal, QC 🇨🇦</span>
-                </div>
-              </div>
             </div>
           </motion.div>
 
