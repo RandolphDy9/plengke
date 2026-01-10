@@ -23,7 +23,7 @@ export default function Contact() {
           <div className="animate-on-scroll h-full flex">
             <div className="glass rounded-3xl p-8 hover:shadow-xl transition-all duration-300 w-full h-full flex flex-col">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center shrink-0">
                   <MapPin className="text-white" size={24} />
                 </div>
                 <div>
@@ -39,7 +39,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center shrink-0">
                   <Phone className="text-white" size={24} />
                 </div>
                 <div>
@@ -64,7 +64,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center shrink-0">
                   <Clock className="text-white" size={24} />
                 </div>
                 <div>

@@ -21,8 +21,8 @@ export default function Navigation() {
         "specials",
         "soups",
         "desserts",
-        "team",
         "gallery",
+        "team",
         "grocery",
         "contact",
       ];
@@ -105,8 +105,8 @@ export default function Navigation() {
     { label: "Specials", href: "#specials", id: "specials" },
     { label: "Soups", href: "#soups", id: "soups" },
     { label: "Desserts", href: "#desserts", id: "desserts" },
-    { label: "Team", href: "#team", id: "team" },
     { label: "Gallery", href: "#gallery", id: "gallery" },
+    { label: "Team", href: "#team", id: "team" },
     { label: "Grocery", href: "#grocery", id: "grocery" },
     { label: "Contact", href: "#contact", id: "contact" },
   ];
@@ -116,8 +116,8 @@ export default function Navigation() {
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#fcf5e3]/95 backdrop-blur-lg shadow-lg py-3"
-          : "bg-transparent py-4 md:py-6"
+          ? "bg-[#fcf5e3]/95 shadow-lg py-3"
+          : "bg-[#fcf5e3]/95 lg:bg-transparent py-4 md:py-6"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -173,11 +173,12 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         <div
-          className={`lg:hidden fixed inset-0 top-[73px] bg-[#fcf5e3]/98 backdrop-blur-lg transition-all duration-300 ease-in-out ${
+          className={`lg:hidden fixed inset-0 bg-[#fcf5e3] backdrop-blur-lg transition-all duration-300 ease-in-out ${
             mobileMenuOpen
               ? "opacity-100 visible translate-x-0"
               : "opacity-0 invisible translate-x-full"
           }`}
+          style={{ top: scrolled ? "73px" : "88px" }}
         >
           <div className="flex flex-col gap-2 py-6 px-4 overflow-y-auto h-[calc(100vh-73px)]">
             {navItems.map((item) => (

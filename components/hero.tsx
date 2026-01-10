@@ -4,7 +4,10 @@ import { Sparkles, Star, Utensils, ShoppingBag, MapPin } from "lucide-react";
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-[#fcf5e3] via-white to-[#f5f0e0]">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-linear-to-br from-[#fcf5e3] via-white to-[#f5f0e0]"
+    >
       {/* Animated Background Decor */}
       <motion.div
         className="absolute top-1/4 -right-20 w-[40vw] h-[40vw] rounded-full bg-[#fd5e02]/20 blur-3xl -z-10"
@@ -220,7 +223,7 @@ const Hero: React.FC = () => {
           </motion.div>
 
           <motion.div
-            className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-2xl z-20 flex items-center justify-center border-2 border-[#023341]/20"
+            className="absolute bottom-4 right-4 md:right-auto md:-bottom-10 md:-left-10 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-[#fcf5e3]/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-2xl z-20 flex items-center justify-center border-2 border-[#fd5e02]/30 md:border-[#023341]/20"
             animate={{
               y: [0, 20, 0],
               rotate: [0, -5, 5, 0],
@@ -230,14 +233,18 @@ const Hero: React.FC = () => {
           >
             <div className="text-center">
               <motion.div
-                className="text-3xl mb-1"
+                className="text-2xl sm:text-3xl mb-1"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
               >
                 🥧
               </motion.div>
-              <p className="text-xs font-black text-[#023341]">Must Try</p>
-              <p className="text-sm font-bold text-[#fd5e02]">Kakanin</p>
+              <p className="text-[10px] sm:text-xs font-black text-[#023341]">
+                Must Try
+              </p>
+              <p className="text-xs sm:text-sm font-bold text-[#fd5e02]">
+                Kakanin
+              </p>
             </div>
           </motion.div>
 

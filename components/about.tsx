@@ -46,7 +46,7 @@ export default function About() {
       }}
     >
       {/* Gradient overlay matching your color scheme */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#023341] via-[#034a5a] to-[#023341] opacity-90" />
+      <div className="absolute inset-0 bg-linear-to-br from-[#023341] via-[#034a5a] to-[#023341] opacity-90" />
 
       {/* Animated pattern overlay */}
       <div className="absolute inset-0 opacity-10">
@@ -125,7 +125,7 @@ export default function About() {
                 className="group relative bg-[#fcf5e3]/10 backdrop-blur-lg rounded-2xl p-6 text-center hover:bg-[#fcf5e3]/20 hover:scale-110 hover:-rotate-2 transition-all duration-500 border border-[#fcf5e3]/20 hover:shadow-2xl hover:shadow-[#fd5e02]/30"
               >
                 <div
-                  className={`inline-flex p-4 bg-gradient-to-br ${stat.color} rounded-2xl mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg`}
+                  className={`inline-flex p-4 bg-linear-to-br ${stat.color} rounded-2xl mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg`}
                 >
                   <Icon className="text-white" size={32} />
                 </div>
