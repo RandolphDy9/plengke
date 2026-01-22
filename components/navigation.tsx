@@ -2,43 +2,18 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-
-      // Detect active section
-      const sections = [
-        "hero",
-        "about",
-        "menu",
-        "specials",
-        "soups",
-        "desserts",
-        "gallery",
-        "team",
-        "grocery",
-        "contact",
-      ];
-
-      const scrollPosition = window.scrollY + 100;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section) {
-          const offsetTop = section.offsetTop;
-          if (scrollPosition >= offsetTop) {
-            setActiveSection(sections[i]);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -80,36 +55,18 @@ export default function Navigation() {
     };
   }, [mobileMenuOpen]);
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    e.preventDefault();
-    const targetId = href.replace("#", "");
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      const offsetTop = targetElement.offsetTop - 80; // Account for fixed nav
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-      setMobileMenuOpen(false);
-    }
-  };
-
   const navItems = [
-    { label: "Home", href: "#hero", id: "hero" },
-    { label: "About", href: "#about", id: "about" },
-    { label: "Menu", href: "#menu", id: "menu" },
-    { label: "Specials", href: "#specials", id: "specials" },
-    { label: "Soups", href: "#soups", id: "soups" },
-    { label: "Desserts", href: "#desserts", id: "desserts" },
-    { label: "Gallery", href: "#gallery", id: "gallery" },
-    { label: "Team", href: "#team", id: "team" },
-    { label: "Grocery", href: "#grocery", id: "grocery" },
-    { label: "Contact", href: "#contact", id: "contact" },
+    { label: "Home", href: "/", id: "home" },
+    { label: "Grocery", href: "/grocery", id: "grocery" },
+    { label: "Lamesa", href: "/lamesa", id: "lamesa" },
   ];
+
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname?.startsWith(href);
+  };
 
   return (
     <nav
@@ -122,9 +79,8 @@ export default function Navigation() {
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between">
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, "#hero")}
+          <Link
+            href="/"
             className="hover:scale-105 transition-transform duration-300"
             aria-label="Home"
           >
@@ -133,31 +89,31 @@ export default function Navigation() {
               alt="P'lengke Logo"
               className="h-12 sm:h-14 md:h-16 w-auto object-contain"
             />
-          </a>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`font-medium transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
-                  activeSection === item.id
-                    ? "text-[#fd5e02]"
-                    : "text-[#023341] hover:text-[#fd5e02]"
-                }`}
-              >
-                {item.label}
-                <span
-                  className={`absolute bottom-0 left-0 h-0.5 bg-[#fd5e02] transition-all duration-300 ${
-                    activeSection === item.id
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
+            {navItems.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`font-medium transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
+                    active
+                      ? "text-[#fd5e02]"
+                      : "text-[#023341] hover:text-[#fd5e02]"
                   }`}
-                />
-              </a>
-            ))}
+                >
+                  {item.label}
+                  <span
+                    className={`absolute bottom-0 left-0 h-0.5 bg-[#fd5e02] transition-all duration-300 ${
+                      active ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
           {/* Mobile Menu Button */}
@@ -181,20 +137,23 @@ export default function Navigation() {
           style={{ top: scrolled ? "73px" : "88px" }}
         >
           <div className="flex flex-col gap-2 py-6 px-4 overflow-y-auto h-[calc(100vh-73px)]">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`font-medium transition-all duration-300 py-3 px-4 rounded-lg ${
-                  activeSection === item.id
-                    ? "text-[#fd5e02] bg-[#fd5e02]/10"
-                    : "text-[#023341] hover:text-[#fd5e02] hover:bg-[#fd5e02]/5"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`font-medium transition-all duration-300 py-3 px-4 rounded-lg ${
+                    active
+                      ? "text-[#fd5e02] bg-[#fd5e02]/10"
+                      : "text-[#023341] hover:text-[#fd5e02] hover:bg-[#fd5e02]/5"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

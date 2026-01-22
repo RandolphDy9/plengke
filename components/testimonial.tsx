@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import { Star } from "lucide-react";
 
 type Testimonial = {
   name: string;
@@ -145,6 +146,15 @@ export default function WallOfLoveSection() {
                       </Avatar>
 
                       <div>
+                        <div className="flex items-center gap-1 mb-2">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className="w-4 h-4 fill-[#fd5e02] text-[#fd5e02]"
+                            />
+                          ))}
+                        </div>
+
                         <h3 className="font-medium">{name}</h3>
 
                         <span className="text-muted-foreground block text-sm tracking-wide">

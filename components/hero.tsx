@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Star, Utensils, ShoppingBag, MapPin } from "lucide-react";
+import { Sparkles, Star } from "lucide-react";
 
 const Hero: React.FC = () => {
   return (
