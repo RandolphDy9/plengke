@@ -1,8 +1,52 @@
+"use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Star } from "lucide-react";
+import { urlFor } from "@/sanity/lib/image";
+import type { Image } from "sanity";
 
-const Hero: React.FC = () => {
+interface FloatingCard {
+  emoji?: string;
+  label?: string;
+  title?: string;
+}
+
+interface HeroProps {
+  badge?: string;
+  titlePrefix?: string;
+  titleHighlight?: string;
+  description?: string;
+  primaryButtonText?: string;
+  primaryButtonLink?: string;
+  secondaryButtonText?: string;
+  secondaryButtonLink?: string;
+  address?: string;
+  statusText?: string;
+  heroImage?: Image;
+  floatingCard1?: FloatingCard;
+  floatingCard2?: FloatingCard;
+}
+
+const Hero: React.FC<HeroProps> = ({
+  badge = "Pamilihang Bayan ng Montreal",
+  titlePrefix = "Welcome to",
+  titleHighlight = "P'LENGKE!",
+  description = "Experience authentic Filipino cuisine and find all your favorite ingredients from the Philippines, right here in the heart of Montreal. 🇨🇦 🇵🇭",
+  primaryButtonText = "Explore Menu",
+  primaryButtonLink = "#menu",
+  secondaryButtonText = "Visit our FB Page",
+  secondaryButtonLink = "https://www.facebook.com/PlengkeMTL",
+  address = "📍 4693-4699 Ave Van Horne",
+  statusText = "Open Daily • Montreal, QC H3W 1H8",
+  heroImage,
+  floatingCard1 = { emoji: "🍢", label: "New Daily", title: "Pork BBQ" },
+  floatingCard2 = { emoji: "🥧", label: "Must Try", title: "Kakanin" },
+}) => {
+  const heroImageUrl = heroImage
+    ? urlFor(heroImage).width(800).height(600).url()
+    : "/images/hero-image.jpg";
+
   return (
     <section
       id="hero"
@@ -71,7 +115,7 @@ const Hero: React.FC = () => {
               }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              Pamilihang Bayan ng Montreal
+              {badge}
             </motion.span>
 
             <motion.h1
@@ -85,14 +129,12 @@ const Hero: React.FC = () => {
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              Welcome to <span className="text-[#fd5e02]">P&apos;LENGKE!</span>
+              {titlePrefix} <span className="text-[#fd5e02]">{titleHighlight}</span>
             </motion.h1>
 
             <div className="space-y-4 sm:space-y-5 max-w-lg mx-auto md:mx-0">
               <p className="text-base sm:text-lg md:text-xl text-[#023341]/80 leading-relaxed px-2 sm:px-0">
-                Experience authentic Filipino cuisine and find all your favorite
-                ingredients from the Philippines, right here in the heart of
-                Montreal. 🇨🇦 🇵🇭
+                {description}
               </p>
             </div>
           </motion.div>
@@ -104,7 +146,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <motion.a
-              href="#menu"
+              href={primaryButtonLink}
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 20px 25px -5px rgb(253 94 2 / 0.5)",
@@ -113,7 +155,7 @@ const Hero: React.FC = () => {
               className="px-10 py-5 bg-gradient-to-r from-[#fd5e02] to-[#e65500] text-white rounded-2xl flex items-center justify-center font-extrabold text-lg shadow-2xl shadow-[#fd5e02]/30 relative overflow-hidden group"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Explore Menu
+                {primaryButtonText}
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
@@ -130,7 +172,7 @@ const Hero: React.FC = () => {
             </motion.a>
 
             <motion.a
-              href="https://www.facebook.com/PlengkeMTL"
+              href={secondaryButtonLink}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{
@@ -141,7 +183,7 @@ const Hero: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className="px-10 py-5 border-2 border-[#023341]/20 text-[#023341] rounded-2xl flex items-center justify-center font-extrabold text-lg transition-all duration-300"
             >
-              Visit our FB Page
+              {secondaryButtonText}
             </motion.a>
           </motion.div>
 
@@ -156,7 +198,7 @@ const Hero: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             >
               <span className="text-[#023341] font-bold text-lg flex items-center gap-2">
-                📍 4693-4699 Ave Van Horne
+                {address}
               </span>
               <span className="inline-flex items-center gap-2 mt-1">
                 <motion.span
@@ -164,7 +206,7 @@ const Hero: React.FC = () => {
                   transition={{ duration: 1.5, repeat: Infinity }}
                   className="w-2 h-2 bg-green-500 rounded-full"
                 />
-                Open Daily • Montreal, QC H3W 1H8
+                {statusText}
               </span>
             </motion.p>
           </motion.div>
@@ -190,8 +232,8 @@ const Hero: React.FC = () => {
               transition={{ duration: 3, repeat: Infinity }}
             >
               <motion.img
-                src="/images/hero-image.jpg"
-                alt="P'lengke Signature Lechon"
+                src={heroImageUrl}
+                alt="P'lengke Signature Dish"
                 className="w-full h-auto object-cover"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
@@ -215,10 +257,10 @@ const Hero: React.FC = () => {
                 animate={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                🍢
+                {floatingCard1?.emoji}
               </motion.div>
-              <p className="text-xs font-black text-[#023341]">New Daily</p>
-              <p className="text-lg font-bold text-[#fd5e02]">Pork BBQ</p>
+              <p className="text-xs font-black text-[#023341]">{floatingCard1?.label}</p>
+              <p className="text-lg font-bold text-[#fd5e02]">{floatingCard1?.title}</p>
             </div>
           </motion.div>
 
@@ -237,13 +279,13 @@ const Hero: React.FC = () => {
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
               >
-                🥧
+                {floatingCard2?.emoji}
               </motion.div>
               <p className="text-[10px] sm:text-xs font-black text-[#023341]">
-                Must Try
+                {floatingCard2?.label}
               </p>
               <p className="text-xs sm:text-sm font-bold text-[#fd5e02]">
-                Kakanin
+                {floatingCard2?.title}
               </p>
             </div>
           </motion.div>

@@ -1,64 +1,28 @@
-"use client";
+import { client } from "@/sanity/lib/client";
+import HomeContent from "@/components/home-content";
 
-import { useEffect } from "react";
-import Hero from "@/components/hero";
-import About from "@/components/about";
-import Menu from "@/components/menu";
-import MenuSpecials from "@/components/menu-specials";
-import Soups from "@/components/soups";
-import Desserts from "@/components/desserts";
-import Team from "@/components/team";
-import Gallery from "@/components/gallery";
-import Contact from "@/components/contact";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import ScrollToTop from "@/components/scroll-to-top";
-import WallOfLoveSection from "@/components/testimonial";
+async function getHeroData() {
+  const query = `*[_type == "hero"][0]{
+    badge,
+    titlePrefix,
+    titleHighlight,
+    description,
+    primaryButtonText,
+    primaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonLink,
+    address,
+    statusText,
+    heroImage,
+    floatingCard1,
+    floatingCard2
+  }`;
 
-export default function Home() {
-  useEffect(() => {
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+  return client.fetch(query);
+}
 
-    // Observe all elements with animate-on-scroll class
-    setTimeout(() => {
-      const elements = document.querySelectorAll(".animate-on-scroll");
-      elements.forEach((el) => observer.observe(el));
-    }, 2100);
+export default async function Home() {
+  const heroData = await getHeroData();
 
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  return (
-    <>
-      <Navigation />
-      <main>
-        <Hero />
-        <About />
-        {/* <Feature /> */}
-        <Menu />
-        <MenuSpecials />
-        <Soups />
-        <Desserts />
-        <Gallery />
-        <Team />
-        {/* <GroceryStore /> */}
-        <WallOfLoveSection />
-        <Contact />
-      </main>
-      <Footer />
-      <ScrollToTop />
-    </>
-  );
+  return <HomeContent heroData={heroData} />;
 }
