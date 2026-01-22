@@ -1,94 +1,185 @@
 "use client";
 
-import { Package, Leaf, Fish, IceCream } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function GroceryStore() {
-  const categories = [
-    {
-      icon: Package,
-      name: "Pantry Staples",
-      description: "Rice, noodles, sauces, and cooking essentials",
-      items: ["Jasmine Rice", "Pancit Canton", "Bagoong", "Banana Ketchup"],
-    },
-    {
-      icon: Leaf,
-      name: "Fresh Produce",
-      description: "Tropical fruits and vegetables",
-      items: ["Ube", "Calamansi", "Kangkong", "Green Papaya"],
-    },
-    {
-      icon: Fish,
-      name: "Meat & Seafood",
-      description: "Fresh and frozen options",
-      items: ["Milkfish", "Pork Belly", "Chicken", "Shrimp"],
-    },
-    {
-      icon: IceCream,
-      name: "Frozen Treats",
-      description: "Ice cream, desserts, and more",
-      items: ["Ube Ice Cream", "Halo-Halo Mix", "Lumpia", "Spring Rolls"],
-    },
-  ];
+type GroceryItem = {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  inStock: boolean;
+  featured?: boolean;
+};
+
+type GroceryStoreProps = {
+  initialItems: GroceryItem[];
+};
+
+const itemsPerPageOptions = [12, 24, 36, 48];
+
+export default function GroceryStore({ initialItems = [] }: GroceryStoreProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(15);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Get unique categories from items
+  const categories = useMemo(() => {
+    const uniqueCategories = Array.from(
+      new Set(initialItems.map(item => item.category))
+    ).sort();
+    return ["All", ...uniqueCategories];
+  }, [initialItems]);
+
+  const filteredItems = useMemo(() => {
+    if (selectedCategory === "All") return initialItems;
+    return initialItems.filter(item => item.category === selectedCategory);
+  }, [selectedCategory, initialItems]);
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+  // Reset page when filter or items-per-page changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, itemsPerPage]);
+
+  const paginatedItems = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return filteredItems.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredItems, currentPage, itemsPerPage]);
+
+  const handlePageChange = (page: number) => {
+    const nextPage = Math.min(Math.max(1, page), totalPages);
+    setCurrentPage(nextPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <section
-      id="grocery"
-      className="py-20 bg-linear-to-br from-[#fcf5e3] via-white to-[#f5f0e0]"
-    >
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12 animate-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#fd5e02] mb-4">
-            Grocery Store
-          </h2>
-          <p className="text-lg text-[#023341]/80 max-w-2xl mx-auto">
-            Everything you need to cook authentic Filipino dishes at home
-          </p>
-          <div className="w-24 h-1 bg-linear-to-r from-[#fd5e02] via-[#023341] to-[#fd5e02] mx-auto rounded-full mt-4" />
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((category, index) => {
-            const Icon = category.icon;
-            return (
-              <div
-                key={index}
-                className="animate-on-scroll glass rounded-3xl p-6 hover:shadow-2xl transition-all duration-500 hover:scale-105 group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-[#fd5e02] to-[#fcf5e3] border-2 border-[#023341] rounded-2xl mb-4 group-hover:rotate-12 transition-transform duration-300">
-                  <Icon size={28} />
-                </div>
-                <h3 className="text-xl font-bold text-[#023341] mb-2 group-hover:text-[#fd5e02] transition-colors">
-                  {category.name}
-                </h3>
-                <p className="text-[#023341]/80 mb-4 text-sm leading-relaxed">
-                  {category.description}
-                </p>
-                <ul className="space-y-2">
-                  {category.items.map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      className="text-sm text-[#023341]/80 flex items-center gap-2"
-                    >
-                      <span className="w-1.5 h-1.5 bg-[#fd5e02] rounded-full" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="text-center mt-12 animate-on-scroll">
-          <a
-            href="#contact"
-            className="inline-block px-8 py-4 bg-linear-to-r from-orange-500 to-orange-600 text-white rounded-full font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+    <section className="py-20 min-h-screen">
+      {/* Category Filter */}
+      <div className="mb-8 flex flex-wrap gap-3 justify-center">
+        {categories.map(category => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
+              selectedCategory === category
+                ? "bg-linear-to-r from-orange-500 to-orange-600 text-white shadow-lg"
+                : "bg-white/60 backdrop-blur-sm border-2 border-orange-500/30 text-orange-600 hover:border-orange-500 hover:bg-white/80"
+            }`}
           >
-            Visit Our Store
-          </a>
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* Grid */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-12 container mx-auto px-4">
+        {paginatedItems.map(item => (
+          <div key={item.id} className="border rounded-xl p-4 bg-white relative">
+            <div className="relative">
+              <img 
+                src={item.image} 
+                alt={item.name} 
+                className={`h-40 w-full object-contain rounded ${!item.inStock ? "opacity-50" : ""}`} 
+              />
+              {!item.inStock && (
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center rounded">
+                  <span className="bg-white/90 text-gray-800 px-4 py-2 rounded-full font-bold text-sm">
+                    Out of Stock
+                  </span>
+                </div>
+              )}
+              {item.featured && item.inStock && (
+                <div className="absolute top-2 left-2 bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                  FEATURED
+                </div>
+              )}
+              {item.originalPrice && item.inStock && (
+                <div className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                  SALE
+                </div>
+              )}
+            </div>
+            <h3 className={`mt-2 font-bold ${!item.inStock ? "text-gray-400" : ""}`}>
+              {item.name}
+            </h3>
+            <div className="flex items-center gap-2">
+              <p className={`font-bold ${!item.inStock ? "text-gray-400 line-through" : "text-orange-600"}`}>
+                ${item.price.toFixed(2)}
+              </p>
+              {item.originalPrice && item.inStock && (
+                <p className="text-sm text-gray-500 line-through">
+                  ${item.originalPrice.toFixed(2)}
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className={`flex items-center gap-2 container mx-auto px-4 ${filteredItems.length > 12 ? "justify-between" : "justify-end"}`}>
+
+        {/* Items Per Page */}
+        { filteredItems.length > 12 && <div className="flex justify-center mb-6">
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600 font-semibold">Show</span>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+              className="px-3 py-2 rounded-lg border border-orange-300 bg-white text-orange-600 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-400"
+            >
+              {itemsPerPageOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <span className="text-sm text-gray-600 font-semibold">
+              of {filteredItems.length} items
+            </span>
+          </div>
+        </div> }
+
+        {/* Pagination */}
+        <div className="flex justify-between items-center gap-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-4 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 bg-white/60 backdrop-blur-sm border-2 border-orange-500/30 text-orange-600 hover:border-orange-500 hover:bg-white/80"
+            aria-label="Previous page"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
+                page === currentPage
+                  ? "bg-linear-to-r from-orange-500 to-orange-600 text-white shadow-lg"
+                  : "bg-white/60 backdrop-blur-sm border-2 border-orange-500/30 text-orange-600 hover:border-orange-500 hover:bg-white/80"
+              }`}
+              aria-label={`Go to page ${page}`}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-4 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 bg-white/60 backdrop-blur-sm border-2 border-orange-500/30 text-orange-600 hover:border-orange-500 hover:bg-white/80"
+            aria-label="Next page"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
       </div>
+
     </section>
   );
 }

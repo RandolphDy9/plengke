@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     "Kare-Kare Montreal",
     "Filipino market Montreal",
   ],
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   openGraph: {
     title: "P'lengke - Authentic Filipino Restaurant & Grocery in Montreal",
     description:
