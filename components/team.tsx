@@ -1,38 +1,37 @@
 "use client";
 
-export default function Team() {
-  const teamMembers = [
-    {
-      name: "Maria",
-      role: "Kitchen Manager",
-      image: "/images/staff-2.jpg",
-      alt: "Chef proudly presenting large lechon roll",
-    },
-    {
-      name: "Miguel",
-      role: "Head Chef",
-      image: "/images/staff-1.jpg",
-      alt: "Team member holding lechon roll with warm smile",
-    },
-    {
-      name: "Ana",
-      role: "Store Manager",
-      image: "/images/staff-3.jpg",
-      alt: "Staff member displaying tray of lechon slices",
-    },
-  ];
+import PageHeader from "@/components/page-header";
+
+type TeamMember = {
+  name: string;
+  role: string;
+  image: string;
+  alt: string;
+};
+
+const defaultMembers: TeamMember[] = [
+  { name: "Maria", role: "Kitchen Manager", image: "/images/staff-2.jpg", alt: "Chef proudly presenting large lechon roll" },
+  { name: "Miguel", role: "Head Chef", image: "/images/staff-1.jpg", alt: "Team member holding lechon roll with warm smile" },
+  { name: "Ana", role: "Store Manager", image: "/images/staff-3.jpg", alt: "Staff member displaying tray of lechon slices" },
+];
+
+type TeamProps = {
+  members?: TeamMember[];
+  title?: string;
+  subtitle?: string;
+};
+
+export default function Team({ members, title, subtitle }: TeamProps) {
+  const teamMembers = members && members.length > 0 ? members : defaultMembers;
 
   return (
     <section id="team" className="py-20 bg-[#fcf5e3]/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 animate-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#fd5e02] mb-4">
-            Meet Our Team
-          </h2>
-          <p className="text-lg text-[#023341]/80 max-w-2xl mx-auto">
-            The passionate people behind your favorite Filipino dishes
-          </p>
-          <div className="w-24 h-1 bg-linear-to-r from-[#fd5e02] via-[#023341] to-[#fd5e02] mx-auto rounded-full mt-4" />
+        <div className="mb-12">
+          <PageHeader
+            title={title || "Meet Our Team"}
+            subtitle={subtitle || "The passionate people behind your favorite Filipino dishes"}
+          />
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -51,9 +50,7 @@ export default function Team() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#fd5e02]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6 text-center">
-                <h3 className="text-xl font-bold text-[#023341] mb-1">
-                  {member.name}
-                </h3>
+                <h3 className="text-xl font-bold text-[#023341] mb-1">{member.name}</h3>
                 <p className="text-[#fd5e02] font-semibold">{member.role}</p>
               </div>
             </div>

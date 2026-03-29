@@ -1,49 +1,96 @@
-"use client";
-
-import { useEffect } from "react";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import Navigation from "@/components/navigation";
-import Menu from "@/components/menu";
-import MenuSpecials from "@/components/menu-specials";
-import Soups from "@/components/soups";
-import Desserts from "@/components/desserts";
 import Footer from "@/components/footer";
 import ScrollToTop from "@/components/scroll-to-top";
+import ScrollAnimationHandler from "@/components/scroll-animation-handler";
+import PageHeader from "@/components/page-header";
 
-export default function LamesaPage() {
-  useEffect(() => {
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+export const revalidate = 10;
 
-    // Observe all elements with animate-on-scroll class
-    setTimeout(() => {
-      const elements = document.querySelectorAll(".animate-on-scroll");
-      elements.forEach((el) => observer.observe(el));
-    }, 100);
+const SIZE_MAP: Record<string, string> = {
+  large: "row-span-2 col-span-2",
+  small: "row-span-1 col-span-1",
+};
 
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+const defaultWorks = [
+  { id: 1, title: "Artisanal Brew", category: "Branding Seals", image: "/images/menu-1.jpg", span: "row-span-2 col-span-2" },
+  { id: 2, title: "Coffee Sleeve", category: "Photography", image: "/images/menu-2.jpg", span: "row-span-1 col-span-1" },
+  { id: 3, title: "Packaging Design", category: "Web Design", image: "/images/food-1.jpg", span: "row-span-1 col-span-1" },
+  { id: 4, title: "Breakfast Tray", category: "True Perfection", image: "/images/food-2.jpg", span: "row-span-1 col-span-1" },
+  { id: 5, title: "Pink Stationery", category: "Photography", image: "/images/food-3.jpg", span: "row-span-1 col-span-1" },
+  { id: 6, title: "Coffee Sleeve", category: "Photography", image: "/images/menu-2.jpg", span: "row-span-1 col-span-1" },
+  { id: 7, title: "Packaging Design", category: "Web Design", image: "/images/food-1.jpg", span: "row-span-1 col-span-1" },
+  { id: 8, title: "Breakfast Tray", category: "True Perfection", image: "/images/food-2.jpg", span: "row-span-1 col-span-1" },
+  { id: 9, title: "Pink Stationery", category: "Photography", image: "/images/food-3.jpg", span: "row-span-1 col-span-1" },
+];
+
+export default async function LamesaPage() {
+  const [rawItems, rawSiteSettings, pageHeader] = await Promise.all([
+    client.fetch(`*[_type == "lamesaItem"] | order(order asc, title asc){
+      _id, title, category, image, size
+    }`),
+    client.fetch(`*[_type == "siteSettings"][0]{
+      siteName, footerDescription, address1, address2,
+      phone1, phone2, hoursDay, hoursTime
+    }`),
+    client.fetch(`*[_type == "pageContent" && pageId == "lamesa"][0]{ title, subtitle }`),
+  ]);
+
+  const works =
+    rawItems && rawItems.length > 0
+      ? rawItems.map((item: any, index: number) => ({
+          id: index,
+          title: item.title,
+          category: item.category || "",
+          image: item.image
+            ? urlFor(item.image).width(800).url()
+            : "/placeholder.svg",
+          span: SIZE_MAP[item.size] || "row-span-1 col-span-1",
+        }))
+      : defaultWorks;
 
   return (
     <>
+      <ScrollAnimationHandler />
       <Navigation />
-      <main>
-        <Menu />
-        <MenuSpecials />
-        <Soups />
-        <Desserts />
+      <main className="mt-32 mb-20 bg-[#fcf5e3]">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="mb-12">
+            <PageHeader
+              title={pageHeader?.title || "Lamesa"}
+              subtitle={pageHeader?.subtitle || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."}
+            />
+          </div>
+
+          {/* Grid Gallery */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 min-h-[800px]">
+            {works.map((work: {id: number, title: string, category: string, image: string, span: string}, index: number) => (
+              <div
+                key={work.id}
+                className={`relative overflow-hidden group cursor-pointer animate-on-scroll ${work.span || ""}`}
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                <div className="w-full h-full overflow-hidden bg-white/20 backdrop-blur-sm rounded-lg shadow-sm">
+                  <img
+                    src={work.image}
+                    alt={work.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                    <div className="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="font-bold text-xl mb-1">{work.title}</h3>
+                      <p className="text-sm opacity-80">{work.category}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
-      <Footer />
+      <Footer data={rawSiteSettings ?? undefined} />
       <ScrollToTop />
     </>
   );

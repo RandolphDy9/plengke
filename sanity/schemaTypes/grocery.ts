@@ -22,6 +22,7 @@ export const grocery = defineType({
           { title: 'Pantry Staples', value: 'Pantry Staples' },
           { title: 'Fresh Produce', value: 'Fresh Produce' },
           { title: 'Household Items', value: 'Household Items' },
+          { title: 'Others', value: 'Others' },
         ],
       },
       validation: (Rule) => Rule.required(),

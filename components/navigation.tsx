@@ -57,6 +57,7 @@ export default function Navigation() {
 
   const navItems = [
     { label: "Home", href: "/", id: "home" },
+    { label: "Menu", href: "/menu", id: "menu" },
     { label: "Grocery", href: "/grocery", id: "grocery" },
     { label: "Lamesa", href: "/lamesa", id: "lamesa" },
   ];

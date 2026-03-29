@@ -1,39 +1,33 @@
 "use client";
 
-export default function Desserts() {
-  const desserts = [
-    {
-      image: "/images/dessert-1.jpg",
-      alt: "Assorted Filipino desserts platter with bibingka, puto, and traditional sweets",
-    },
-    {
-      image: "/images/dessert-2.jpg",
-      alt: "Ube cake - purple yam dessert with P'lengke label",
-    },
-    {
-      image: "/images/dessert-3.jpg",
-      alt: "Mango or buko pie with golden custard filling",
-    },
-    {
-      image: "/images/dessert-4.jpg",
-      alt: "Leche flan - creamy caramel custard with P'lengke label",
-    },
-  ];
+import PageHeader from "@/components/page-header";
+
+type DessertItem = { image: string; alt: string };
+
+const defaultDesserts: DessertItem[] = [
+  { image: "/images/dessert-1.jpg", alt: "Assorted Filipino desserts platter with bibingka, puto, and traditional sweets" },
+  { image: "/images/dessert-2.jpg", alt: "Ube cake - purple yam dessert with P\u2019lengke label" },
+  { image: "/images/dessert-3.jpg", alt: "Mango or buko pie with golden custard filling" },
+  { image: "/images/dessert-4.jpg", alt: "Leche flan - creamy caramel custard with P\u2019lengke label" },
+];
+
+type DessertsProps = {
+  items?: DessertItem[];
+  title?: string;
+  subtitle?: string;
+};
+
+export default function Desserts({ items, title, subtitle }: DessertsProps) {
+  const desserts = items && items.length > 0 ? items : defaultDesserts;
 
   return (
-    <section
-      id="desserts"
-      className="py-20 bg-linear-to-br from-[#fcf5e3] via-white to-[#f5f0e0]"
-    >
+    <section id="desserts" className="py-20 bg-linear-to-br from-[#fcf5e3] via-white to-[#f5f0e0]">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 animate-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#fd5e02] mb-4">
-            Sweet Delights
-          </h2>
-          <p className="text-lg text-[#023341]/80 max-w-2xl mx-auto">
-            Traditional Filipino desserts to complete your meal
-          </p>
-          <div className="w-24 h-1 bg-linear-to-r from-[#fd5e02] via-[#023341] to-[#fd5e02] mx-auto rounded-full mt-4" />
+        <div className="mb-12">
+          <PageHeader
+            title={title || "Sweet Delights"}
+            subtitle={subtitle || "Traditional Filipino desserts to complete your meal"}
+          />
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

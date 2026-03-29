@@ -5,30 +5,22 @@ import GroceryStore from "@/components/grocery-store";
 import Footer from "@/components/footer";
 import ScrollToTop from "@/components/scroll-to-top";
 import ScrollAnimationHandler from "@/components/scroll-animation-handler";
+import PageHeader from "@/components/page-header";
 
-// ISR: Revalidate every 10 seconds (adjust as needed)
 export const revalidate = 10;
 
-async function getGroceryItems() {
-  const query = `*[_type == "grocery"] | order(order asc, name asc) {
-    _id,
-    name,
-    category,
-    price,
-    originalPrice,
-    image,
-    inStock,
-    featured,
-    order
-  }`;
-
-  return client.fetch(query);
-}
-
 export default async function GroceryPage() {
-  const groceryItems = await getGroceryItems();
+  const [groceryItems, rawSiteSettings, pageHeader] = await Promise.all([
+    client.fetch(`*[_type == "grocery"] | order(order asc, name asc) {
+      _id, name, category, price, originalPrice, image, inStock, featured, order
+    }`),
+    client.fetch(`*[_type == "siteSettings"][0]{
+      siteName, footerDescription, address1, address2,
+      phone1, phone2, hoursDay, hoursTime
+    }`),
+    client.fetch(`*[_type == "pageContent" && pageId == "grocery"][0]{ title, subtitle }`),
+  ]);
 
-  // Transform Sanity data to match component expectations
   const transformedItems = groceryItems.map((item: any) => ({
     id: item._id,
     name: item.name,
@@ -40,23 +32,18 @@ export default async function GroceryPage() {
     featured: item.featured ?? false,
   }));
 
+  const title = pageHeader?.title || "Our Grocery Items";
+  const subtitle = pageHeader?.subtitle || "Browse our selection of groceries and find the perfect items for your home.";
+
   return (
     <>
       <ScrollAnimationHandler />
       <Navigation />
       <main className="mt-32 mb-20">
-        <div className="text-center container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-teal-900 mb-4">
-            Our Grocery Items
-          </h2>
-          <p className="text-lg text-teal-800/80 max-w-2xl mx-auto">
-            Browse our selection of groceries and find the perfect items for your home.
-          </p>
-          <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-teal-700 to-orange-500 mx-auto rounded-full mt-4" />
-        </div>
+        <PageHeader title={title} subtitle={subtitle} />
         <GroceryStore initialItems={transformedItems} />
       </main>
-      <Footer />
+      <Footer data={rawSiteSettings ?? undefined} />
       <ScrollToTop />
     </>
   );
