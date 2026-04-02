@@ -12,13 +12,11 @@ export const menuItem = defineType({
       type: 'string',
       options: {
         list: [
-          { title: "Mains", value: "mains" },
-          { title: "Soups", value: "soups" },
-          { title: "Grilled", value: "grilled" },
-          { title: "Seafood", value: "seafood" },
-          { title: "Pancit", value: "pancit" },
-          { title: "Desserts", value: "desserts" },
-          { title: "Drinks", value: "drinks" },
+          { title: "Daily", value: "daily" },
+          { title: "Specials", value: "specials" },
+          { title: "Kakanin/Desserts", value: "kakanin-desserts" },
+          { title: "Summer Delight", value: "summer-delight" },
+          { title: "Cafe Corner", value: "cafe-corner" },
         ],
       },
       validation: (Rule) => Rule.required(),

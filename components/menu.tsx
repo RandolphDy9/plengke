@@ -15,23 +15,21 @@ type MenuItem = {
 const ITEMS_PER_PAGE = 6;
 
 const defaultMenuItems: MenuItem[] = [
-  { name: "Bulalo", category: "soups", description: "Traditional beef shank soup with vegetables and bone marrow", price: "$16.99", image: "/images/food-1.jpg" },
-  { name: "Kare-Kare", category: "mains", description: "Rich peanut stew with oxtail and vegetables", price: "$18.99", image: "/images/food-6.jpg" },
-  { name: "BBQ Skewers", category: "grilled", description: "Glazed chicken skewers with sweet and savory sauce", price: "$12.99", image: "/images/food-4.jpg" },
-  { name: "Bistek", category: "mains", description: "Filipino beef steak with onions in savory sauce", price: "$15.99", image: "/images/food-5.jpg" },
-  { name: "Shredded Chicken", category: "mains", description: "Tender shredded chicken with peppers and spices", price: "$14.99", image: "/images/food-2.jpg" },
-  { name: "Spicy Beef", category: "mains", description: "Beef in rich curry sauce with bell peppers", price: "$17.99", image: "/images/food-3.jpg" },
+  { name: "Bulalo", category: "daily", description: "Traditional beef shank soup with vegetables and bone marrow", price: "$16.99", image: "/images/food-1.jpg" },
+  { name: "Kare-Kare", category: "daily", description: "Rich peanut stew with oxtail and vegetables", price: "$18.99", image: "/images/food-6.jpg" },
+  { name: "BBQ Skewers", category: "specials", description: "Glazed chicken skewers with sweet and savory sauce", price: "$12.99", image: "/images/food-4.jpg" },
+  { name: "Bistek", category: "specials", description: "Filipino beef steak with onions in savory sauce", price: "$15.99", image: "/images/food-5.jpg" },
+  { name: "Shredded Chicken", category: "kakanin-desserts", description: "Tender shredded chicken with peppers and spices", price: "$14.99", image: "/images/food-2.jpg" },
+  { name: "Spicy Beef", category: "summer-delight", description: "Beef in rich curry sauce with bell peppers", price: "$17.99", image: "/images/food-3.jpg" },
 ];
 
 const categories = [
   { id: "all", label: "All" },
-  { id: "mains", label: "Mains" },
-  { id: "soups", label: "Soup" },
-  { id: "grilled", label: "Grilled" },
-  { id: "seafood", label: "Seafood" },
-  { id: "pancit", label: "Pancit" },
-  { id: "desserts", label: "Desserts" },
-  { id: "drinks", label: "Drinks" },
+  { id: "daily", label: "Daily" },
+  { id: "specials", label: "Specials" },
+  { id: "kakanin-desserts", label: "Kakanin/Desserts" },
+  { id: "summer-delight", label: "Summer Delight" },
+  { id: "cafe-corner", label: "Cafe Corner" },
 ];
 
 export default function Menu({
@@ -61,17 +59,7 @@ export default function Menu({
     setCurrentPage(1);
   }, [activeCategory]);
 
-  useEffect(() => {
-    const isVisible =
-      activeCategory === "all" ||
-      menuItems.some((item) => item.category === activeCategory);
-
-    if (!isVisible) {
-      setActiveCategory("all");
-    }
-  }, [menuItems, activeCategory]);
-
-  const paginatedItems = useMemo(() => {
+const paginatedItems = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredItems.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredItems, currentPage]);
@@ -95,13 +83,7 @@ export default function Menu({
         {/* Category Filter */}
         <div className="mb-12">
           <div className="flex overflow-x-auto pb-4 gap-3 no-scrollbar sm:flex-wrap sm:justify-center sm:pb-0">
-            {categories
-              .filter(
-                (category) =>
-                  category.id === "all" ||
-                  menuItems.some((item) => item.category === category.id)
-              )
-              .map((category) => {
+            {categories.map((category) => {
                 return (
                   <button
                     key={category.id}
