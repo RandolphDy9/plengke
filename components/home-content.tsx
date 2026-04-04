@@ -12,6 +12,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import ScrollToTop from "@/components/scroll-to-top";
 import WallOfLoveSection from "@/components/testimonial";
+import Announcements from "@/components/announcements";
 import type { Image } from "sanity";
 
 interface FloatingCard {
@@ -62,6 +63,16 @@ interface TeamMember {
   alt: string;
 }
 
+interface AnnouncementItem {
+  title: string;
+  badge?: string;
+  description?: string;
+  image: string;
+  alt?: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
 interface Testimonial {
   name: string;
   role: string;
@@ -91,6 +102,9 @@ interface SiteSettingsData {
 
 interface HomeContentProps {
   heroData?: HeroData;
+  announcements?: AnnouncementItem[];
+  announcementsTitle?: string;
+  announcementsSubtitle?: string;
   menuItems?: MenuItem[];
   menuSpecials?: MenuSpecial[];
   desserts?: DessertItem[];
@@ -114,6 +128,9 @@ interface HomeContentProps {
 
 export default function HomeContent({
   heroData,
+  announcements,
+  announcementsTitle,
+  announcementsSubtitle,
   menuItems,
   menuSpecials,
   desserts,
@@ -161,6 +178,7 @@ export default function HomeContent({
       <Navigation />
       <main>
         <Hero {...heroData} />
+        <Announcements items={announcements} title={announcementsTitle} subtitle={announcementsSubtitle} />
         <About data={aboutData} />
         <Menu
           initialItems={menuItems}

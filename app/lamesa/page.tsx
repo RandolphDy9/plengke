@@ -34,7 +34,7 @@ export default async function LamesaPage() {
       siteName, footerDescription, address1, address2,
       phone1, phone2, hoursDay, hoursTime
     }`),
-    client.fetch(`*[_type == "pageContent" && pageId == "lamesa"][0]{ title, subtitle }`),
+    client.fetch(`*[_type == "pageContent" && pageId == "lamesa"][0]{ title, subtitle, body, bodySubtext, bodyImage }`),
   ]);
 
   const works =
@@ -60,8 +60,35 @@ export default async function LamesaPage() {
           <div className="mb-12">
             <PageHeader
               title={pageHeader?.title || "Lamesa"}
-              subtitle={pageHeader?.subtitle || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."}
+              subtitle={pageHeader?.subtitle || "A curated gallery of P'Lengke's finest dishes and moments."}
             />
+          </div>
+
+          {/* About Lamesa */}
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20 animate-on-scroll">
+            {/* Text */}
+            <div className="flex-1 space-y-5 text-left">
+              <p className="text-[#023341] text-base md:text-lg leading-relaxed whitespace-pre-line">
+                {pageHeader?.body ||
+                  "Lamesa — meaning 'table' in Filipino — is P'Lengke's way of bringing people together through food. It's more than a dining experience; it's a celebration of Filipino culture, flavors, and the warmth of sharing a meal with loved ones. Every dish on our table is crafted with heart, using traditional recipes passed down through generations."}
+              </p>
+              <p className="text-[#023341]/60 text-sm md:text-base leading-relaxed whitespace-pre-line">
+                {pageHeader?.bodySubtext ||
+                  "Browse through our gallery and get a taste of what awaits you. From festive gatherings to everyday ulam, Lamesa is your seat at the Filipino table — right here in Montreal."}
+              </p>
+            </div>
+            {/* Image */}
+            <div className="flex-1 w-full">
+              <img
+                src={
+                  pageHeader?.bodyImage
+                    ? urlFor(pageHeader.bodyImage).width(800).height(600).url()
+                    : "/images/hero-image.jpg"
+                }
+                alt="About Lamesa"
+                className="w-full h-72 md:h-96 object-cover rounded-3xl shadow-lg"
+              />
+            </div>
           </div>
 
           {/* Grid Gallery */}

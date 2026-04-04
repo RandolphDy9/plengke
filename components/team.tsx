@@ -34,7 +34,7 @@ export default function Team({ members, title, subtitle }: TeamProps) {
           />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {teamMembers.map((member, index) => (
             <div
               key={index}

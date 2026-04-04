@@ -10,6 +10,7 @@ import { about } from './about'
 import { siteSettings } from './siteSettings'
 import { lamesaItem } from './lamesaItem'
 import { pageContent } from './pageContent'
+import { announcement } from './announcement'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -24,5 +25,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     siteSettings,
     lamesaItem,
     pageContent,
+    announcement,
   ],
 }

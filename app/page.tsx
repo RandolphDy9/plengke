@@ -20,6 +20,8 @@ export default async function Home() {
     teamHeader,
     testimonialsHeader,
     contactHeader,
+    rawAnnouncements,
+    announcementsHeader,
   ] = await Promise.all([
     client.fetch(`*[_type == "hero"][0]{
       badge, titlePrefix, titleHighlight, description,
@@ -55,6 +57,10 @@ export default async function Home() {
     client.fetch(`*[_type == "pageContent" && pageId == "section-team"][0]{ title, subtitle }`),
     client.fetch(`*[_type == "pageContent" && pageId == "section-testimonials"][0]{ title, subtitle }`),
     client.fetch(`*[_type == "pageContent" && pageId == "section-contact"][0]{ title, subtitle }`),
+    client.fetch(`*[_type == "announcement" && active == true] | order(order asc){
+      title, badge, description, image, alt, buttonText, buttonLink
+    }`),
+    client.fetch(`*[_type == "pageContent" && pageId == "section-announcements"][0]{ title, subtitle }`),
   ]);
 
   const menuItems = rawMenuItems?.map((item: any) => ({
@@ -99,6 +105,16 @@ export default async function Home() {
     stats: rawAbout.stats,
   } : undefined;
 
+  const announcements = rawAnnouncements?.map((item: any) => ({
+    title: item.title,
+    badge: item.badge,
+    description: item.description,
+    image: item.image ? urlFor(item.image).width(800).height(450).url() : "/placeholder.svg",
+    alt: item.alt || item.title,
+    buttonText: item.buttonText,
+    buttonLink: item.buttonLink,
+  })) ?? [];
+
   const siteSettings = rawSiteSettings ? {
     siteName: rawSiteSettings.siteName,
     footerDescription: rawSiteSettings.footerDescription,
@@ -117,6 +133,9 @@ export default async function Home() {
   return (
     <HomeContent
       heroData={heroData}
+      announcements={announcements}
+      announcementsTitle={announcementsHeader?.title}
+      announcementsSubtitle={announcementsHeader?.subtitle}
       menuItems={menuItems}
       menuSpecials={menuSpecials}
       desserts={desserts}
