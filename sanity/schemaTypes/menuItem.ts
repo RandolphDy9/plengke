@@ -15,7 +15,6 @@ export const menuItem = defineType({
           { title: "Daily", value: "daily" },
           { title: "Specials", value: "specials" },
           { title: "Kakanin/Desserts", value: "kakanin-desserts" },
-          { title: "Summer Delight", value: "summer-delight" },
           { title: "Cafe Corner", value: "cafe-corner" },
         ],
       },

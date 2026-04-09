@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import ScrollToTop from "@/components/scroll-to-top";
 import ScrollAnimationHandler from "@/components/scroll-animation-handler";
 import PageHeader from "@/components/page-header";
+import LamesaGallery from "@/components/lamesa-gallery";
 
 export const revalidate = 10;
 
@@ -54,7 +55,7 @@ export default async function LamesaPage() {
     <>
       <ScrollAnimationHandler />
       <Navigation />
-      <main className="mt-32 mb-20 bg-[#fcf5e3]">
+      <main className="mt-48 mb-20">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="mb-12">
@@ -68,11 +69,11 @@ export default async function LamesaPage() {
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20 animate-on-scroll">
             {/* Text */}
             <div className="flex-1 space-y-5 text-left">
-              <p className="text-[#023341] text-base md:text-lg leading-relaxed whitespace-pre-line">
+              <p className="text-[var(--foreground)] text-base md:text-lg leading-relaxed whitespace-pre-line">
                 {pageHeader?.body ||
                   "Lamesa — meaning 'table' in Filipino — is P'Lengke's way of bringing people together through food. It's more than a dining experience; it's a celebration of Filipino culture, flavors, and the warmth of sharing a meal with loved ones. Every dish on our table is crafted with heart, using traditional recipes passed down through generations."}
               </p>
-              <p className="text-[#023341]/60 text-sm md:text-base leading-relaxed whitespace-pre-line">
+              <p className="text-[var(--foreground)]/60 text-sm md:text-base leading-relaxed whitespace-pre-line">
                 {pageHeader?.bodySubtext ||
                   "Browse through our gallery and get a taste of what awaits you. From festive gatherings to everyday ulam, Lamesa is your seat at the Filipino table — right here in Montreal."}
               </p>
@@ -91,29 +92,9 @@ export default async function LamesaPage() {
             </div>
           </div>
 
-          {/* Grid Gallery */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 min-h-[800px]">
-            {works.map((work: {id: number, title: string, category: string, image: string, span: string}, index: number) => (
-              <div
-                key={work.id}
-                className={`relative overflow-hidden group cursor-pointer animate-on-scroll ${work.span || ""}`}
-                style={{ transitionDelay: `${index * 50}ms` }}
-              >
-                <div className="w-full h-full overflow-hidden bg-white/20 backdrop-blur-sm rounded-lg shadow-sm">
-                  <img
-                    src={work.image}
-                    alt={work.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-                    <div className="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="font-bold text-xl mb-1">{work.title}</h3>
-                      <p className="text-sm opacity-80">{work.category}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Interactive Slider Gallery */}
+          <div className="mb-24 px-4 md:px-12">
+            <LamesaGallery items={works} />
           </div>
         </div>
       </main>

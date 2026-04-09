@@ -72,18 +72,8 @@ export const hero = defineType({
       },
     }),
     defineField({
-      name: 'floatingCard1',
-      title: 'Floating Card 1 (Top Right)',
-      type: 'object',
-      fields: [
-        { name: 'emoji', type: 'string', title: 'Emoji' },
-        { name: 'label', type: 'string', title: 'Label (e.g., "New Daily")' },
-        { name: 'title', type: 'string', title: 'Title (e.g., "Pork BBQ")' },
-      ],
-    }),
-    defineField({
-      name: 'floatingCard2',
-      title: 'Floating Card 2 (Bottom Left)',
+      name: 'floatingCard',
+      title: 'Floating Card (Bottom Right)',
       type: 'object',
       fields: [
         { name: 'emoji', type: 'string', title: 'Emoji' },

@@ -26,6 +26,8 @@ export const grocery = defineType({
           { title: 'Household', value: 'Household' },
           { title: 'Health & Beauty', value: 'Health & Beauty' },
           { title: 'Sari-Sari', value: 'Sari-Sari' },
+          { title: 'Snacks', value: 'Snacks' },
+          { title: 'Chichirya', value: 'Chichirya' },
         ],
       },
       validation: (Rule) => Rule.required(),

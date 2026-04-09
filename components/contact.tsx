@@ -38,7 +38,7 @@ export default function Contact({ data, title, subtitle }: ContactProps) {
   return (
     <section
       id="contact"
-      className="py-20 bg-linear-to-br from-[#fcf5e3] via-white to-[#f5f0e0]"
+      className="py-20 relative overflow-hidden"
     >
       <div className="container mx-auto px-4">
         <div className="mb-12">
@@ -53,12 +53,12 @@ export default function Contact({ data, title, subtitle }: ContactProps) {
           <div className="animate-on-scroll h-full flex">
             <div className="glass rounded-3xl p-8 hover:shadow-xl transition-all duration-300 w-full h-full flex flex-col">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 bg-linear-to-br from-[var(--primary)] to-[var(--foreground)] rounded-xl flex items-center justify-center shrink-0">
                   <MapPin className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#023341] mb-2">Location</h3>
-                  <p className="text-[#023341]/80 leading-relaxed">
+                  <h3 className="text-xl font-bold text-[var(--foreground)] mb-2">Location</h3>
+                  <p className="text-[var(--foreground)]/80 leading-relaxed">
                     {d.address1}
                     <br />
                     {d.address2}
@@ -67,19 +67,19 @@ export default function Contact({ data, title, subtitle }: ContactProps) {
               </div>
 
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 bg-linear-to-br from-[var(--primary)] to-[var(--foreground)] rounded-xl flex items-center justify-center shrink-0">
                   <Phone className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#023341] mb-2">Phone</h3>
-                  <p className="text-[#023341]/80">
+                  <h3 className="text-xl font-bold text-[var(--foreground)] mb-2">Phone</h3>
+                  <p className="text-[var(--foreground)]/80">
                     {d.phone1 && (
-                      <a href={`tel:${d.phone1}`} className="hover:text-[#fd5e02] transition-colors block">
+                      <a href={`tel:${d.phone1}`} className="hover:text-[var(--primary)] transition-colors block">
                         {d.phone1}
                       </a>
                     )}
                     {d.phone2 && (
-                      <a href={`tel:${d.phone2}`} className="hover:text-[#fd5e02] transition-colors block">
+                      <a href={`tel:${d.phone2}`} className="hover:text-[var(--primary)] transition-colors block">
                         {d.phone2}
                       </a>
                     )}
@@ -88,12 +88,12 @@ export default function Contact({ data, title, subtitle }: ContactProps) {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-linear-to-br from-[#fd5e02] to-[#023341] rounded-xl flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 bg-linear-to-br from-[var(--primary)] to-[var(--foreground)] rounded-xl flex items-center justify-center shrink-0">
                   <Clock className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#023341] mb-2">Hours</h3>
-                  <p className="text-[#023341]/80 leading-relaxed">
+                  <h3 className="text-xl font-bold text-[var(--foreground)] mb-2">Hours</h3>
+                  <p className="text-[var(--foreground)]/80 leading-relaxed">
                     {d.hoursDay}
                     <br />
                     {d.hoursTime}
@@ -118,7 +118,7 @@ export default function Contact({ data, title, subtitle }: ContactProps) {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg bg-[#fd5e02] px-6 py-3 rounded-full">
+                  <span className="text-white font-bold text-lg bg-[var(--primary)] px-6 py-3 rounded-full">
                     View on Google Maps
                   </span>
                 </div>

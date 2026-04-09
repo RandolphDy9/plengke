@@ -33,8 +33,7 @@ interface HeroData {
   address?: string;
   statusText?: string;
   heroImage?: Image;
-  floatingCard1?: FloatingCard;
-  floatingCard2?: FloatingCard;
+  floatingCard?: FloatingCard;
 }
 
 interface MenuItem {
@@ -52,8 +51,10 @@ interface MenuSpecial {
 }
 
 interface DessertItem {
+  title: string;
   image: string;
   alt: string;
+  description?: string;
 }
 
 interface TeamMember {
@@ -184,6 +185,7 @@ export default function HomeContent({
           initialItems={menuItems}
           title={menuTitle}
           subtitle={menuSubtitle}
+          showPagination={false}
         />
         <MenuSpecials specials={menuSpecials} title={specialsTitle} subtitle={specialsSubtitle} />
         <Desserts items={desserts} title={dessertsTitle} subtitle={dessertsSubtitle} />

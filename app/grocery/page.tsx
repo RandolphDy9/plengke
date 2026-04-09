@@ -39,7 +39,7 @@ export default async function GroceryPage() {
     <>
       <ScrollAnimationHandler />
       <Navigation />
-      <main className="mt-32 mb-20">
+      <main className="mt-48 mb-20">
         <PageHeader title={title} subtitle={subtitle} />
         <GroceryStore initialItems={transformedItems} />
       </main>

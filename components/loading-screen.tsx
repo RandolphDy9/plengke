@@ -20,7 +20,7 @@ export default function LoadingScreen() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-linear-to-br from-[#023341] via-[#fd5e02] to-[#023341]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-linear-to-br from-[var(--foreground)] via-[var(--primary)] to-[var(--foreground)]">
       <div className="text-center">
         <div className="mb-8 animate-bounce">
           <div className="text-6xl font-bold text-white drop-shadow-lg">

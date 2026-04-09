@@ -57,7 +57,7 @@ export default function Navigation() {
 
   const navItems = [
     { label: "Home", href: "/", id: "home" },
-    { label: "Menu", href: "/menu", id: "menu" },
+    { label: "Karenderya", href: "/menu", id: "menu" },
     { label: "Grocery", href: "/grocery", id: "grocery" },
     { label: "Lamesa", href: "/lamesa", id: "lamesa" },
   ];
@@ -74,53 +74,67 @@ export default function Navigation() {
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#fcf5e3]/95 shadow-lg py-3"
-          : "bg-[#fcf5e3]/95 lg:bg-transparent py-4 md:py-6"
+          ? "bg-[var(--background)]/95 shadow-lg py-3"
+          : "bg-[var(--background)]/95 lg:bg-transparent py-4 md:py-6"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="hover:scale-105 transition-transform duration-300"
-            aria-label="Home"
-          >
-            <img
-              src="/images/logo.png"
-              alt="P'lengke Logo"
-              className="h-12 sm:h-14 md:h-16 w-auto object-contain"
-            />
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navItems.map((item) => {
+        <div className="flex items-center justify-between lg:justify-center relative">
+          {/* Desktop Left Menu */}
+          <div className="hidden lg:flex items-center gap-8 xl:gap-12 flex-1 justify-end">
+            {navItems.slice(0, 2).map((item) => {
               const active = isActive(item.href);
               return (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`font-medium transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
-                    active
-                      ? "text-[#fd5e02]"
-                      : "text-[#023341] hover:text-[#fd5e02]"
+                  className={`font-black uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
+                    active ? "text-primary" : "text-secondary hover:text-primary"
                   }`}
                 >
                   {item.label}
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 bg-[#fd5e02] transition-all duration-300 ${
-                      active ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
+                  <span className={`absolute bottom-0 left-0 h-1 bg-primary transition-all duration-300 ${active ? "w-full" : "w-0 group-hover:w-full"}`} />
                 </Link>
               );
             })}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Logo - Centered */}
+          <Link
+            href="/"
+            className="hover:scale-105 transition-transform duration-300 mx-8 z-10"
+            aria-label="Home"
+          >
+            <img
+              src="/images/logo.png"
+              alt="P'lengke Logo"
+              className="h-16 sm:h-20 md:h-24 w-auto object-contain transition-all duration-300"
+            />
+          </Link>
+
+          {/* Desktop Right Menu */}
+          <div className="hidden lg:flex items-center gap-8 xl:gap-12 flex-1 justify-start">
+            {navItems.slice(2).map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`font-black uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
+                    active ? "text-primary" : "text-secondary hover:text-primary"
+                  }`}
+                >
+                  {item.label}
+                  <span className={`absolute bottom-0 left-0 h-1 bg-primary transition-all duration-300 ${active ? "w-full" : "w-0 group-hover:w-full"}`} />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile Menu Button - Absolute positioned to the right on mobile */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-[#023341] hover:text-[#fd5e02] transition-colors p-2 z-50 relative"
+            className="lg:hidden text-secondary hover:text-primary transition-colors p-2 z-50 absolute right-0"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -130,7 +144,7 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         <div
-          className={`lg:hidden fixed inset-0 bg-[#fcf5e3] backdrop-blur-lg transition-all duration-300 ease-in-out ${
+          className={`lg:hidden fixed inset-0 bg-[var(--background)] backdrop-blur-lg transition-all duration-300 ease-in-out ${
             mobileMenuOpen
               ? "opacity-100 visible translate-x-0"
               : "opacity-0 invisible translate-x-full"
@@ -147,8 +161,8 @@ export default function Navigation() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`font-medium transition-all duration-300 py-3 px-4 rounded-lg ${
                     active
-                      ? "text-[#fd5e02] bg-[#fd5e02]/10"
-                      : "text-[#023341] hover:text-[#fd5e02] hover:bg-[#fd5e02]/5"
+                      ? "text-[var(--primary)] bg-[var(--primary)]/10"
+                      : "text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/5"
                   }`}
                 >
                   {item.label}

@@ -26,50 +26,51 @@ export default function Footer({ data }: { data?: SiteSettingsData }) {
   const hoursTime = data?.hoursTime || "10:00 AM - 10:00 PM";
 
   return (
-    <footer className="relative bg-linear-to-br from-[#023341] via-[#034a5a] to-[#023341] text-white pt-16 pb-8 overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+    <footer className="relative bg-accent text-[#9a1010] pt-20 pb-12 overflow-hidden border-t-8 border-primary">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
           <div className="animate-on-scroll">
-            <h3 className="text-3xl font-bold mb-4">{siteName}</h3>
-            <p className="text-[#fcf5e3]/90 leading-relaxed">{footerDescription}</p>
+            <h3 className="text-4xl font-black mb-6 tracking-tighter uppercase italic">{siteName}</h3>
+            <p className="font-bold leading-tight opacity-80 uppercase text-xs tracking-widest">{footerDescription}</p>
           </div>
 
           {/* Hours */}
           <div className="animate-on-scroll">
-            <h4 className="text-xl font-bold mb-4">Hours</h4>
-            <div className="space-y-2 text-[#fcf5e3]/90">
+            <h4 className="text-xl font-black mb-6 uppercase tracking-widest border-b-2 border-[#9a1010] inline-block">Hours</h4>
+            <div className="space-y-2 font-bold uppercase text-sm tracking-wide">
               <p>{hoursDay}</p>
-              <p className="font-semibold text-white">{hoursTime}</p>
+              <p className="text-2xl font-black">{hoursTime}</p>
             </div>
           </div>
 
           {/* Contact */}
           <div className="animate-on-scroll">
-            <h4 className="text-xl font-bold mb-4">Contact</h4>
-            <div className="space-y-3 text-[#fcf5e3]/90">
-              <p>{address1}</p>
-              <p>{address2}</p>
-              {phone1 && (
-                <a href={`tel:${phone1}`} className="flex items-center gap-2 hover:text-white transition-colors">
-                  <Phone size={16} />
-                  {phone1}
-                </a>
-              )}
-              {phone2 && (
-                <a href={`tel:${phone2}`} className="flex items-center gap-2 hover:text-white transition-colors">
-                  <Phone size={16} />
-                  {phone2}
-                </a>
-              )}
+            <h4 className="text-xl font-black mb-6 uppercase tracking-widest border-b-2 border-[#9a1010] inline-block">Contact</h4>
+            <div className="space-y-4 font-bold uppercase text-sm tracking-wide">
+              <p>{address1}<br />{address2}</p>
+              <div className="flex flex-col gap-2">
+                {phone1 && (
+                  <a href={`tel:${phone1}`} className="flex items-center gap-2 hover:translate-x-2 transition-transform">
+                    <Phone size={18} strokeWidth={3} />
+                    {phone1}
+                  </a>
+                )}
+                {phone2 && (
+                  <a href={`tel:${phone2}`} className="flex items-center gap-2 hover:translate-x-2 transition-transform">
+                    <Phone size={18} strokeWidth={3} />
+                    {phone2}
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="text-center text-xs text-[#fcf5e3]/90 pt-8 border-t border-white/10 animate-on-scroll flex justify-between">
+        <div className="text-center text-[10px] font-black uppercase tracking-[0.2em] pt-8 border-t-2 border-[#9a1010]/20 animate-on-scroll flex flex-col md:flex-row justify-between gap-4 opacity-70">
           <p>&copy; {new Date().getFullYear()} P&apos;lengke. All rights reserved.</p>
-          <p>Built by <a href="https://randolphdy.com" target="_blank" rel="noopener noreferrer">Randolph Dy</a></p>
+          <p>Built with ❤️ by <a href="https://randolphdy.com" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Randolph Dy</a></p>
         </div>
       </div>
     </footer>

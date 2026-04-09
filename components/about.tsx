@@ -14,10 +14,10 @@ type AboutData = {
 
 const ICONS = [Users, Award, Heart, Clock, Store];
 const COLORS = [
-  "from-[#fd5e02] to-[#e65500]",
-  "from-[#fcf5e3] to-[#fd5e02]",
-  "from-[#fd5e02] to-[#023341]",
-  "from-[#034a5a] to-[#023341]",
+  "from-[var(--primary)] to-[#C62828]",
+  "from-[var(--background)] to-[var(--primary)]",
+  "from-[var(--primary)] to-[var(--foreground)]",
+  "from-[var(--secondary)] to-[var(--foreground)]",
 ];
 
 const defaultStats: Stat[] = [
@@ -51,9 +51,9 @@ export default function About({ data }: { data?: AboutData }) {
       className="py-20 relative overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url('${bgImage}')` }}
     >
-      <div className="absolute inset-0 bg-linear-to-br from-[#023341] via-[#034a5a] to-[#023341] opacity-90" />
+      <div className="absolute inset-0 bg-linear-to-br from-[var(--foreground)] via-[var(--secondary)] to-[var(--foreground)] opacity-90" />
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(253,94,2,0.3),transparent_50%)] animate-pulse" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(230,46,45,0.3),transparent_50%)] animate-pulse" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -64,19 +64,19 @@ export default function About({ data }: { data?: AboutData }) {
             }`}
           >
             <div className="flex justify-center mb-4">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#fd5e02]/20 backdrop-blur-sm border border-[#fd5e02]/30 rounded-full text-[#fcf5e3]">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--primary)]/20 backdrop-blur-sm border border-[var(--primary)]/30 rounded-full text-[var(--background)]">
                 <Store size={20} />
                 <span className="font-semibold">Restaurant &amp; Grocery</span>
               </div>
             </div>
 
-            <h3 className="text-3xl md:text-4xl font-bold text-[#fcf5e3] leading-tight text-center">
+            <h3 className="text-3xl md:text-4xl font-bold text-[var(--background)] leading-tight text-center">
               Your Neighborhood{" "}
-              <span className="text-[#fd5e02]">Filipino Market</span>
+              <span className="text-[var(--primary)]">Filipino Market</span>
             </h3>
 
-            <p className="text-lg text-[#fcf5e3]/90 leading-relaxed text-center">{paragraph1}</p>
-            <p className="text-lg text-[#fcf5e3]/90 leading-relaxed text-center">{paragraph2}</p>
+            <p className="text-lg text-[var(--background)]/90 leading-relaxed text-center">{paragraph1}</p>
+            <p className="text-lg text-[var(--background)]/90 leading-relaxed text-center">{paragraph2}</p>
           </div>
         </div>
 
@@ -92,17 +92,17 @@ export default function About({ data }: { data?: AboutData }) {
               <div
                 key={stat.label}
                 style={{ animationDelay: `${index * 100}ms` }}
-                className="group relative bg-[#fcf5e3]/10 backdrop-blur-lg rounded-2xl p-6 text-center hover:bg-[#fcf5e3]/20 hover:scale-110 hover:-rotate-2 transition-all duration-500 border border-[#fcf5e3]/20 hover:shadow-2xl hover:shadow-[#fd5e02]/30"
+                className="group relative bg-[var(--background)]/10 backdrop-blur-lg rounded-2xl p-6 text-center hover:bg-[var(--background)]/20 hover:scale-110 hover:-rotate-2 transition-all duration-500 border border-[var(--background)]/20 hover:shadow-2xl hover:shadow-[var(--primary)]/30"
               >
                 <div
                   className={`inline-flex p-4 bg-linear-to-br ${color} rounded-2xl mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg`}
                 >
                   <Icon className="text-white" size={32} />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-[#fcf5e3] mb-2 group-hover:text-[#fd5e02] transition-colors">
+                <div className="text-3xl md:text-4xl font-bold text-[var(--background)] mb-2 group-hover:text-[var(--primary)] transition-colors">
                   {stat.value}
                 </div>
-                <div className="text-sm md:text-base text-[#fcf5e3]/80 font-semibold">{stat.label}</div>
+                <div className="text-sm md:text-base text-[var(--background)]/80 font-semibold">{stat.label}</div>
               </div>
             );
           })}

@@ -36,7 +36,7 @@ export default async function MenuPage() {
     <>
       <ScrollAnimationHandler />
       <Navigation />
-      <main className="mt-32 mb-20">
+      <main className="mt-48 mb-20">
         <PageHeader title={title} subtitle={subtitle} />
         <Menu initialItems={menuItems} />
       </main>

@@ -4,74 +4,74 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #fcf5e3;
-  --foreground: #023341;
+  --background: #fdfdfd;
+  --foreground: #9a1010; /* Deep red for main headings */
   --card: #ffffff;
-  --card-foreground: #023341;
+  --card-foreground: #345cb2; /* Royal blue for card titles/elements */
   --popover: #ffffff;
-  --popover-foreground: #023341;
-  --primary: #fd5e02;
+  --popover-foreground: #345cb2;
+  --primary: #c41230; /* Deep Red */
   --primary-foreground: #ffffff;
-  --secondary: #023341;
-  --secondary-foreground: #fcf5e3;
-  --muted: #f5f0e0;
-  --muted-foreground: #023341;
-  --accent: #fd5e02;
-  --accent-foreground: #ffffff;
+  --secondary: #345cb2; /* Royal Blue */
+  --secondary-foreground: #ffffff;
+  --muted: #fef9e7; /* Light beige/yellow */
+  --muted-foreground: #345cb2;
+  --accent: #ffce00; /* Golden Yellow */
+  --accent-foreground: #9a1010;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #e8e0d0;
-  --input: #e8e0d0;
-  --ring: #fd5e02;
-  --chart-1: #fd5e02;
-  --chart-2: #023341;
-  --chart-3: #fcf5e3;
-  --chart-4: #fd5e02;
-  --chart-5: #023341;
-  --radius: 1rem;
-  --sidebar: #fcf5e3;
-  --sidebar-foreground: #023341;
-  --sidebar-primary: #fd5e02;
+  --border: #345cb2; /* Blue borders as seen in product cards */
+  --input: #345cb2;
+  --ring: #c41230;
+  --chart-1: #c41230;
+  --chart-2: #345cb2;
+  --chart-3: #ffce00;
+  --chart-4: #c41230;
+  --chart-5: #345cb2;
+  --radius: 0.5rem; /* More angular in the new image */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #345cb2;
+  --sidebar-primary: #c41230;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f5f0e0;
-  --sidebar-accent-foreground: #023341;
-  --sidebar-border: #e8e0d0;
-  --sidebar-ring: #fd5e02;
+  --sidebar-accent: #fef9e7;
+  --sidebar-accent-foreground: #345cb2;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #c41230;
 }
 
 .dark {
-  --background: #023341;
-  --foreground: #fcf5e3;
-  --card: #034a5a;
-  --card-foreground: #fcf5e3;
-  --popover: #034a5a;
-  --popover-foreground: #fcf5e3;
-  --primary: #fd5e02;
+  --background: #174390;
+  --foreground: #ffffff;
+  --card: #1c4da1;
+  --card-foreground: #ffffff;
+  --popover: #1c4da1;
+  --popover-foreground: #ffffff;
+  --primary: #E62E2D;
   --primary-foreground: #ffffff;
-  --secondary: #034a5a;
-  --secondary-foreground: #fcf5e3;
-  --muted: #034a5a;
-  --muted-foreground: #fcf5e3;
-  --accent: #fd5e02;
-  --accent-foreground: #ffffff;
-  --destructive: #dc2626;
+  --secondary: #E62E2D;
+  --secondary-foreground: #ffffff;
+  --muted: #1c4da1;
+  --muted-foreground: #e2e8f0;
+  --accent: #F9D800;
+  --accent-foreground: #174390;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #034a5a;
-  --input: #034a5a;
-  --ring: #fd5e02;
-  --chart-1: #fd5e02;
-  --chart-2: #fcf5e3;
-  --chart-3: #023341;
-  --chart-4: #fd5e02;
-  --chart-5: #fcf5e3;
-  --sidebar: #023341;
-  --sidebar-foreground: #fcf5e3;
-  --sidebar-primary: #fd5e02;
+  --border: #1c4da1;
+  --input: #1c4da1;
+  --ring: #F9D800;
+  --chart-1: #E62E2D;
+  --chart-2: #F9D800;
+  --chart-3: #ffffff;
+  --chart-4: #E62E2D;
+  --chart-5: #F9D800;
+  --sidebar: #174390;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #E62E2D;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #034a5a;
-  --sidebar-accent-foreground: #fcf5e3;
-  --sidebar-border: #034a5a;
-  --sidebar-ring: #fd5e02;
+  --sidebar-accent: #1c4da1;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1c4da1;
+  --sidebar-ring: #F9D800;
 }
 
 @theme inline {
@@ -120,16 +120,33 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    background-image: radial-gradient(var(--secondary) 0.5px, transparent 0.5px);
+    background-size: 30px 30px;
+    background-color: #fdfdfd;
   }
 }
 
+h1, h2, h3, .font-black {
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
 @layer utilities {
+  .jagged-bottom {
+    clip-path: polygon(
+      0% 0%, 
+      100% 0%, 
+      100% 95%, 
+      97.5% 100%, 95% 95%, 92.5% 100%, 90% 95%, 87.5% 100%, 85% 95%, 82.5% 100%, 80% 95%, 77.5% 100%, 75% 95%, 72.5% 100%, 70% 95%, 67.5% 100%, 65% 95%, 62.5% 100%, 60% 95%, 57.5% 100%, 55% 95%, 52.5% 100%, 50% 95%, 47.5% 100%, 45% 95%, 42.5% 100%, 40% 95%, 37.5% 100%, 35% 95%, 32.5% 100%, 30% 95%, 27.5% 100%, 25% 95%, 22.5% 100%, 20% 95%, 17.5% 100%, 15% 95%, 12.5% 100%, 10% 95%, 7.5% 100%, 5% 95%, 2.5% 100%, 0% 95%
+    );
+  }
+
   .glass {
-    background: rgba(252, 245, 227, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(2, 51, 65, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--secondary);
   }
 
   .animate-on-scroll {

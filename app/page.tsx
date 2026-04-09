@@ -27,7 +27,7 @@ export default async function Home() {
       badge, titlePrefix, titleHighlight, description,
       primaryButtonText, primaryButtonLink,
       secondaryButtonText, secondaryButtonLink,
-      address, statusText, heroImage, floatingCard1, floatingCard2
+      address, statusText, heroImage, floatingCard
     }`),
     client.fetch(`*[_type == "menuItem"] | order(order asc, name asc){
       _id, name, category, description, price, image
@@ -39,7 +39,7 @@ export default async function Home() {
       _id, image, alt
     }`),
     client.fetch(`*[_type == "teamMember"] | order(order asc, name asc){
-      _id, name, role, image, alt
+      _id, name, role, image, alt, tagline, description
     }`),
     client.fetch(`*[_type == "testimonial"] | order(order asc){
       _id, name, role, avatarUrl, quote
@@ -87,6 +87,8 @@ export default async function Home() {
     role: item.role,
     image: item.image ? urlFor(item.image).width(400).height(533).url() : "/placeholder.svg",
     alt: item.alt || item.name,
+    tagline: item.tagline,
+    description: item.description,
   })) ?? [];
 
   const testimonials = rawTestimonials?.map((item: any) => ({

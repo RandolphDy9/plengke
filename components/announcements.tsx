@@ -20,9 +20,9 @@ interface AnnouncementsProps {
 }
 
 const badgeColors: Record<string, string> = {
-  "Event": "bg-[#023341] text-white",
-  "Seasonal Special": "bg-[#fd5e02] text-white",
-  "Product Alert": "bg-yellow-500 text-[#023341]",
+  "Event": "bg-secondary text-white",
+  "Seasonal Special": "bg-primary text-white",
+  "Product Alert": "bg-accent text-accent-foreground",
   "New Arrival": "bg-green-600 text-white",
   "Promo": "bg-pink-500 text-white",
 };
@@ -60,17 +60,17 @@ export default function Announcements({ items, title, subtitle }: AnnouncementsP
   const displayItems = items && items.length > 0 ? items : DEFAULT_ANNOUNCEMENTS;
 
   return (
-    <section id="announcements" className="py-16 md:py-24 bg-[#fcf5e3]">
+    <section id="announcements" className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="animate-on-scroll flex items-center gap-3 mb-10">
-          <div className="p-2 rounded-xl bg-[#fd5e02]/10">
-            <Megaphone className="text-[#fd5e02]" size={28} />
+          <div className="p-2 rounded-xl bg-primary/10">
+            <Megaphone className="text-primary" size={28} />
           </div>
           <div>
-            <h2 className="text-3xl md:text-4xl font-black text-[#023341]">
-              {title || <>What&apos;s <span className="text-[#fd5e02]">Happening</span></>}
+            <h2 className="text-3xl md:text-4xl font-black text-foreground">
+              {title || <>What&apos;s <span className="text-primary">Happening</span></>}
             </h2>
-            <p className="text-[#023341]/60 text-sm mt-0.5">{subtitle || "Events, promos, and seasonal finds"}</p>
+            <p className="text-foreground/60 text-sm mt-0.5">{subtitle || "Events, promos, and seasonal finds"}</p>
           </div>
         </div>
 
@@ -86,8 +86,7 @@ export default function Announcements({ items, title, subtitle }: AnnouncementsP
           {displayItems.map((item, i) => (
             <motion.div
               key={i}
-              className="animate-on-scroll group relative rounded-3xl overflow-hidden shadow-lg bg-white border border-[#fd5e02]/10 flex flex-col"
-              whileHover={{ y: -6, boxShadow: "0 24px 48px -12px rgba(253,94,2,0.2)" }}
+              className="animate-on-scroll group relative rounded-none overflow-hidden shadow-xl bg-card border-2 border-secondary flex flex-col transform transition-all hover:-translate-y-2"
               transition={{ duration: 0.3 }}
             >
               {/* Image */}
@@ -101,8 +100,8 @@ export default function Announcements({ items, title, subtitle }: AnnouncementsP
                 />
                 {item.badge && (
                   <span
-                    className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow ${
-                      badgeColors[item.badge] ?? "bg-[#fd5e02] text-white"
+                    className={`absolute top-0 left-0 px-4 py-2 font-black uppercase tracking-tighter shadow-lg skew-x-[-15deg] translate-x-2 translate-y-2 z-10 ${
+                      badgeColors[item.badge] ?? "bg-primary text-white"
                     }`}
                   >
                     {item.badge}
@@ -111,20 +110,20 @@ export default function Announcements({ items, title, subtitle }: AnnouncementsP
               </div>
 
               {/* Content */}
-              <div className="p-5 flex flex-col gap-2 flex-1">
-                <h3 className="text-lg font-black text-[#023341] leading-snug">{item.title}</h3>
+              <div className="p-8 flex flex-col gap-3 flex-1">
+                <h3 className="text-2xl font-black text-foreground leading-none uppercase tracking-tighter">{item.title}</h3>
                 {item.description && (
-                  <p className="text-sm text-[#023341]/70 leading-relaxed flex-1">{item.description}</p>
+                  <p className="text-sm font-bold text-foreground/70 uppercase tracking-widest leading-tight flex-1">{item.description}</p>
                 )}
                 {item.buttonText && item.buttonLink && (
                   <a
                     href={item.buttonLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#fd5e02] text-white font-bold text-sm self-start hover:bg-[#e65500] transition-colors"
+                    className="mt-4 inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-black uppercase tracking-[0.2em] self-stretch hover:bg-secondary transition-colors"
                   >
                     {item.buttonText}
-                    <span>→</span>
+                    <span className="text-xl">→</span>
                   </a>
                 )}
               </div>
