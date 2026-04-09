@@ -99,17 +99,19 @@ export default function Navigation() {
             })}
           </div>
 
-          {/* Logo - Centered */}
+          {/* Logo - Centered in a white circular hub */}
           <Link
             href="/"
-            className="hover:scale-105 transition-transform duration-300 mx-8 z-10"
+            className="hover:scale-110 transition-transform duration-300 mx-4 sm:mx-8 z-20 shrink-0"
             aria-label="Home"
           >
-            <img
-              src="/images/logo.png"
-              alt="P'lengke Logo"
-              className="h-16 sm:h-20 md:h-24 w-auto object-contain transition-all duration-300"
-            />
+            <div className="bg-[#FDFDFD] rounded-full shadow-2xl flex items-center justify-center aspect-square w-20 sm:w-22 md:w-28">
+              <img
+                src="/images/logo.png"
+                alt="P'lengke Logo"
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </Link>
 
           {/* Desktop Right Menu */}
