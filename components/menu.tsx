@@ -194,7 +194,7 @@ export default function Menu({
                   </div>
                   <div className="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <span className="bg-white text-secondary px-6 py-3 font-black uppercase text-xs tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform">
-                      View Recipe
+                      View Details
                     </span>
                   </div>
                 </div>
