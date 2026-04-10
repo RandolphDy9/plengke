@@ -177,11 +177,11 @@ export default function Team({ members, title, subtitle }: TeamProps) {
               </button>
 
               {/* Image Section */}
-              <div className="w-full md:w-1/2 aspect-square md:aspect-auto h-80 md:h-auto relative">
+              <div className="w-full md:w-1/2 relative bg-secondary/5 flex items-center justify-center overflow-hidden">
                 <img 
                   src={selectedMember.image} 
                   alt={selectedMember.name} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
 

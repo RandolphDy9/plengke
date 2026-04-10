@@ -26,7 +26,7 @@ export default async function MenuPage() {
     category: item.category,
     description: item.description || "",
     price: item.price,
-    image: item.image ? urlFor(item.image).width(600).height(400).url() : "/placeholder.svg",
+    image: item.image ? urlFor(item.image).width(1200).url() : "/placeholder.svg",
   })) ?? [];
 
   const title = pageHeader?.title || "Our Menu";

@@ -324,11 +324,11 @@ export default function Menu({
                 <X size={32} strokeWidth={3} />
               </button>
 
-              <div className="w-full md:w-1/2 aspect-square md:aspect-auto h-64 md:h-auto relative">
+              <div className="w-full md:w-1/2 relative bg-secondary/5 flex items-center justify-center overflow-hidden">
                 <img 
                   src={selectedItem.image} 
                   alt={selectedItem.name} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
                 <div className="absolute top-8 left-0 bg-primary text-white font-black text-2xl px-8 py-4 skew-x-[-12deg] -translate-x-2 shadow-2xl">
                   {selectedItem.price}

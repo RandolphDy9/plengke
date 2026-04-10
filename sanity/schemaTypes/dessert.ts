@@ -5,7 +5,9 @@ export const dessert = defineType({
   title: 'Dessert',
   type: 'document',
   fields: [
-    defineField({ name: 'alt', title: 'Description / Alt Text', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'description', title: 'Full Description', type: 'text', rows: 4 }),
+    defineField({ name: 'alt', title: 'Alt Text (for Accessibility)', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true }, validation: (Rule) => Rule.required() }),
     defineField({ name: 'order', title: 'Display Order', type: 'number' }),
   ],
@@ -13,6 +15,6 @@ export const dessert = defineType({
     { title: 'Display Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
   ],
   preview: {
-    select: { title: 'alt', media: 'image' },
+    select: { title: 'title', media: 'image' },
   },
 })

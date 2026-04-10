@@ -36,7 +36,7 @@ export default async function Home() {
       _id, title, image, alt
     }`),
     client.fetch(`*[_type == "dessert"] | order(order asc){
-      _id, image, alt
+      _id, title, description, image, alt
     }`),
     client.fetch(`*[_type == "teamMember"] | order(order asc, name asc){
       _id, name, role, image, alt, tagline, description
@@ -68,7 +68,7 @@ export default async function Home() {
     category: item.category,
     description: item.description || "",
     price: item.price,
-    image: item.image ? urlFor(item.image).width(600).height(400).url() : "/placeholder.svg",
+    image: item.image ? urlFor(item.image).width(1200).url() : "/placeholder.svg",
   })) ?? [];
 
   const menuSpecials = rawMenuSpecials?.map((item: any) => ({
@@ -78,14 +78,16 @@ export default async function Home() {
   })) ?? [];
 
   const desserts = rawDesserts?.map((item: any) => ({
-    image: item.image ? urlFor(item.image).width(600).height(600).url() : "/placeholder.svg",
-    alt: item.alt || "",
+    title: item.title,
+    description: item.description,
+    image: item.image ? urlFor(item.image).width(1200).url() : "/placeholder.svg",
+    alt: item.alt || item.title || "",
   })) ?? [];
 
   const teamMembers = rawTeamMembers?.map((item: any) => ({
     name: item.name,
     role: item.role,
-    image: item.image ? urlFor(item.image).width(400).height(533).url() : "/placeholder.svg",
+    image: item.image ? urlFor(item.image).width(1200).url() : "/placeholder.svg",
     alt: item.alt || item.name,
     tagline: item.tagline,
     description: item.description,
@@ -111,7 +113,7 @@ export default async function Home() {
     title: item.title,
     badge: item.badge,
     description: item.description,
-    image: item.image ? urlFor(item.image).width(800).height(450).url() : "/placeholder.svg",
+    image: item.image ? urlFor(item.image).width(1200).url() : "/placeholder.svg",
     alt: item.alt || item.title,
     buttonText: item.buttonText,
     buttonLink: item.buttonLink,

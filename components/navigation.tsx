@@ -79,16 +79,16 @@ export default function Navigation() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between lg:justify-center relative">
+        <div className="flex items-center justify-between lg:justify-center relative gap-4">
           {/* Desktop Left Menu */}
-          <div className="hidden lg:flex items-center gap-8 xl:gap-12 flex-1 justify-end">
+          <div className="hidden lg:flex items-center gap-12 xl:gap-20 flex-1 justify-end">
             {navItems.slice(0, 2).map((item) => {
               const active = isActive(item.href);
               return (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`font-black uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
+                  className={`font-black uppercase tracking-[0.2em] text-xl transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
                     active ? "text-primary" : "text-secondary hover:text-primary"
                   }`}
                 >
@@ -115,14 +115,14 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Right Menu */}
-          <div className="hidden lg:flex items-center gap-8 xl:gap-12 flex-1 justify-start">
+          <div className="hidden lg:flex items-center gap-12 xl:gap-20 flex-1 justify-start">
             {navItems.slice(2).map((item) => {
               const active = isActive(item.href);
               return (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`font-black uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
+                  className={`font-black uppercase tracking-[0.2em] text-xl transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
                     active ? "text-primary" : "text-secondary hover:text-primary"
                   }`}
                 >
@@ -153,7 +153,7 @@ export default function Navigation() {
           }`}
           style={{ top: scrolled ? "73px" : "88px" }}
         >
-          <div className="flex flex-col gap-2 py-6 px-4 overflow-y-auto h-[calc(100vh-73px)]">
+          <div className="flex flex-col gap-4 py-6 px-4 overflow-y-auto h-[calc(100vh-73px)]">
             {navItems.map((item) => {
               const active = isActive(item.href);
               return (
@@ -161,7 +161,7 @@ export default function Navigation() {
                   key={item.id}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`font-medium transition-all duration-300 py-3 px-4 rounded-lg ${
+                  className={`font-black uppercase tracking-[0.1em] text-xl transition-all duration-300 py-4 px-4 rounded-lg ${
                     active
                       ? "text-[var(--primary)] bg-[var(--primary)]/10"
                       : "text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/5"
