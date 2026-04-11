@@ -33,7 +33,7 @@ export default async function LamesaPage() {
     }`),
     client.fetch(`*[_type == "siteSettings"][0]{
       siteName, footerDescription, address1, address2,
-      phone1, phone2, hoursDay, hoursTime
+      phone1, phone2, email, hoursDay, hoursTime
     }`),
     client.fetch(`*[_type == "pageContent" && pageId == "lamesa"][0]{ title, subtitle, body, bodySubtext, bodyImage }`),
   ]);

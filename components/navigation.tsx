@@ -60,6 +60,7 @@ export default function Navigation() {
     { label: "Karenderya", href: "/menu", id: "menu" },
     { label: "Grocery", href: "/grocery", id: "grocery" },
     { label: "Lamesa", href: "/lamesa", id: "lamesa" },
+    { label: "Filipiniana at IBP", href: "/filipiniana", id: "filipiniana" },
   ];
 
   const isActive = (href: string) => {
@@ -74,69 +75,54 @@ export default function Navigation() {
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[var(--background)]/95 shadow-lg py-3"
-          : "bg-[var(--background)]/95 lg:bg-transparent py-4 md:py-6"
+          ? "bg-[var(--background)]/95 shadow-lg py-2"
+          : pathname === "/filipiniana"
+            ? "bg-transparent py-4 md:py-6"
+            : "bg-[var(--background)]/95 lg:bg-transparent py-4 md:py-6"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between lg:justify-center relative gap-4">
-          {/* Desktop Left Menu */}
-          <div className="hidden lg:flex items-center gap-12 xl:gap-20 flex-1 justify-end">
-            {navItems.slice(0, 2).map((item) => {
-              const active = isActive(item.href);
-              return (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  className={`font-black uppercase tracking-[0.2em] text-xl transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
-                    active ? "text-primary" : "text-secondary hover:text-primary"
-                  }`}
-                >
-                  {item.label}
-                  <span className={`absolute bottom-0 left-0 h-1 bg-primary transition-all duration-300 ${active ? "w-full" : "w-0 group-hover:w-full"}`} />
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Logo - Centered in a white circular hub */}
+        <div className="flex items-center justify-between relative">
+          {/* Logo - Aligned Left for better balance */}
           <Link
             href="/"
-            className="hover:scale-110 transition-transform duration-300 mx-4 sm:mx-8 z-20 shrink-0"
+            className="hover:scale-105 transition-transform duration-300 z-20 shrink-0"
             aria-label="Home"
           >
-            <div className="bg-[#FDFDFD] rounded-full shadow-2xl flex items-center justify-center aspect-square w-20 sm:w-22 md:w-28">
+            <div className={`bg-[#FDFDFD] rounded-full shadow-xl flex items-center justify-center aspect-square transition-all duration-500 border border-gray-300 ${
+              scrolled ? "w-16 md:w-20" : "w-18 md:w-24"
+            }`}>
               <img
                 src="/images/logo.png"
                 alt="P'lengke Logo"
-                className="w-full h-auto object-contain"
+                className="w-full h-auto object-contain p-1"
               />
             </div>
           </Link>
 
-          {/* Desktop Right Menu */}
-          <div className="hidden lg:flex items-center gap-12 xl:gap-20 flex-1 justify-start">
-            {navItems.slice(2).map((item) => {
+          {/* Desktop Navigation - Aligned Right */}
+          <div className="hidden lg:flex items-center gap-8 xl:gap-12">
+            {navItems.map((item) => {
               const active = isActive(item.href);
               return (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`font-black uppercase tracking-[0.2em] text-xl transition-all duration-300 hover:scale-110 relative group px-2 py-1 ${
+                  className={`font-black uppercase tracking-[0.15em] text-lg xl:text-xl transition-all duration-300 hover:scale-105 relative group px-2 py-1 ${
                     active ? "text-primary" : "text-secondary hover:text-primary"
                   }`}
                 >
                   {item.label}
-                  <span className={`absolute bottom-0 left-0 h-1 bg-primary transition-all duration-300 ${active ? "w-full" : "w-0 group-hover:w-full"}`} />
+                  <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-primary transition-all duration-300 ${active ? "w-full" : "w-0 group-hover:w-full"}`} />
                 </Link>
               );
             })}
           </div>
 
-          {/* Mobile Menu Button - Absolute positioned to the right on mobile */}
+          {/* Mobile Menu Button - Traditional Right Placement */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-secondary hover:text-primary transition-colors p-2 z-50 absolute right-0"
+            className="lg:hidden text-secondary hover:text-primary transition-colors p-2 z-50"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >

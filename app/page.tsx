@@ -49,7 +49,7 @@ export default async function Home() {
     }`),
     client.fetch(`*[_type == "siteSettings"][0]{
       siteName, footerDescription, address1, address2,
-      phone1, phone2, hoursDay, hoursTime, mapsUrl, mapImage
+      phone1, phone2, email, hoursDay, hoursTime, mapsUrl, mapImage
     }`),
     client.fetch(`*[_type == "pageContent" && pageId == "menu"][0]{ title, subtitle }`),
     client.fetch(`*[_type == "pageContent" && pageId == "section-specials"][0]{ title, subtitle }`),
@@ -126,6 +126,7 @@ export default async function Home() {
     address2: rawSiteSettings.address2,
     phone1: rawSiteSettings.phone1,
     phone2: rawSiteSettings.phone2,
+    email: rawSiteSettings.email,
     hoursDay: rawSiteSettings.hoursDay,
     hoursTime: rawSiteSettings.hoursTime,
     mapsUrl: rawSiteSettings.mapsUrl,

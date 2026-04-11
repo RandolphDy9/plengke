@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 
 type SiteSettingsData = {
   siteName?: string;
@@ -9,6 +9,7 @@ type SiteSettingsData = {
   address2?: string;
   phone1?: string;
   phone2?: string;
+  email?: string;
   hoursDay?: string;
   hoursTime?: string;
 };
@@ -22,6 +23,7 @@ export default function Footer({ data }: { data?: SiteSettingsData }) {
   const address2 = data?.address2 || "Montreal, QC H3W1H8";
   const phone1 = data?.phone1 || "514-991-2449";
   const phone2 = data?.phone2 || "514-379-6570";
+  const email = data?.email || "";
   const hoursDay = data?.hoursDay || "Monday - Sunday";
   const hoursTime = data?.hoursTime || "10:00 AM - 10:00 PM";
 
@@ -60,6 +62,12 @@ export default function Footer({ data }: { data?: SiteSettingsData }) {
                   <a href={`tel:${phone2}`} className="flex items-center gap-2 hover:translate-x-2 transition-transform">
                     <Phone size={18} strokeWidth={3} />
                     {phone2}
+                  </a>
+                )}
+                {email && (
+                  <a href={`mailto:${email}`} className="flex items-center gap-2 hover:translate-x-2 transition-transform">
+                    <Mail size={18} strokeWidth={3} />
+                    {email}
                   </a>
                 )}
               </div>

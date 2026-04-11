@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Phone, Clock } from "lucide-react";
+import { MapPin, Phone, Clock, Mail } from "lucide-react";
 import PageHeader from "@/components/page-header";
 
 type ContactData = {
@@ -8,6 +8,7 @@ type ContactData = {
   address2?: string;
   phone1?: string;
   phone2?: string;
+  email?: string;
   hoursDay?: string;
   hoursTime?: string;
   mapsUrl?: string;
@@ -25,6 +26,7 @@ const defaults: Required<ContactData> = {
   address2: "Montreal, QC H3W1H8",
   phone1: "514-991-2449",
   phone2: "514-379-6570",
+  email: "",
   hoursDay: "Monday - Sunday",
   hoursTime: "10:00 AM - 10:00 PM",
   mapsUrl:
@@ -86,6 +88,23 @@ export default function Contact({ data, title, subtitle }: ContactProps) {
                   </p>
                 </div>
               </div>
+
+              {d.email && (
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 bg-linear-to-br from-[var(--primary)] to-[var(--foreground)] rounded-xl flex items-center justify-center shrink-0">
+                    <Mail className="text-white" size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-[var(--foreground)] mb-2">Email</h3>
+                    <a
+                      href={`mailto:${d.email}`}
+                      className="text-[var(--foreground)]/80 hover:text-[var(--primary)] transition-colors"
+                    >
+                      {d.email}
+                    </a>
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-linear-to-br from-[var(--primary)] to-[var(--foreground)] rounded-xl flex items-center justify-center shrink-0">

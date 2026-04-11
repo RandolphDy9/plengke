@@ -6,9 +6,9 @@ type PageHeaderProps = {
 export default function PageHeader({ title, subtitle }: PageHeaderProps) {
   return (
     <div className="text-center container mx-auto px-4">
-      <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 animate-on-scroll lowercase [font-variant:all-small-caps]">
+      <h1 className="text-4xl md:text-8xl font-black text-foreground mb-4 animate-on-scroll lowercase [font-variant:all-small-caps]">
         {title}
-      </h2>
+      </h1>
       {subtitle && (
         <p
           className="text-lg text-foreground/80 max-w-2xl mx-auto animate-on-scroll"

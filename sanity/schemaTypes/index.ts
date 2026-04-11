@@ -11,6 +11,7 @@ import { siteSettings } from './siteSettings'
 import { lamesaItem } from './lamesaItem'
 import { pageContent } from './pageContent'
 import { announcement } from './announcement'
+import { filipinianaItem } from './filipinianaItem'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -26,5 +27,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     lamesaItem,
     pageContent,
     announcement,
+    filipinianaItem,
   ],
 }
