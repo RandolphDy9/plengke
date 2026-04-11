@@ -90,7 +90,7 @@ export default function Navigation() {
             aria-label="Home"
           >
             <div className={`bg-[#FDFDFD] rounded-full shadow-xl flex items-center justify-center aspect-square transition-all duration-500 border border-gray-300 ${
-              scrolled ? "w-16 md:w-20" : "w-18 md:w-24"
+              scrolled ? "w-20 md:w-24" : "w-24 md:w-36"
             }`}>
               <img
                 src="/images/logo.png"
