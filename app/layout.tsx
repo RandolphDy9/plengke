@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     "Filipino market Montreal",
   ],
   icons: {
-    icon: "/images/logo.png",
-    shortcut: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: "/images/new-logo.png",
+    shortcut: "/images/new-logo.png",
+    apple: "/images/new-logo.png",
   },
   openGraph: {
     title: "P'lengke - Authentic Filipino Restaurant & Grocery in Montreal",

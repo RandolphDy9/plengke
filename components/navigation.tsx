@@ -89,13 +89,13 @@ export default function Navigation() {
             className="hover:scale-105 transition-transform duration-300 z-20 shrink-0"
             aria-label="Home"
           >
-            <div className={`bg-[#FDFDFD] rounded-full shadow-xl flex items-center justify-center aspect-square transition-all duration-500 border border-gray-300 ${
+            <div className={`bg-[#FDFDFD] rounded-full shadow-xl flex items-center justify-center aspect-square transition-all duration-500 border-2 border-secondary ${
               scrolled ? "w-20 md:w-24" : "w-24 md:w-36"
             }`}>
               <img
-                src="/images/logo.png"
+                src="/images/new-logo.png"
                 alt="P'lengke Logo"
-                className="w-full h-auto object-contain p-1"
+                className="w-full h-auto object-contain"
               />
             </div>
           </Link>

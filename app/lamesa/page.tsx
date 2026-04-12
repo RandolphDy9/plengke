@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/scroll-to-top";
 import ScrollAnimationHandler from "@/components/scroll-animation-handler";
 import PageHeader from "@/components/page-header";
 import LamesaGallery from "@/components/lamesa-gallery";
+import HeritageBackground from "@/components/heritage-background";
 
 export const revalidate = 10;
 
@@ -55,7 +56,7 @@ export default async function LamesaPage() {
     <>
       <ScrollAnimationHandler />
       <Navigation />
-      <main className="mt-48 mb-20">
+      <HeritageBackground>
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="mb-12">
@@ -97,7 +98,7 @@ export default async function LamesaPage() {
             <LamesaGallery items={works} />
           </div>
         </div>
-      </main>
+      </HeritageBackground>
       <Footer data={rawSiteSettings ?? undefined} />
       <ScrollToTop />
     </>

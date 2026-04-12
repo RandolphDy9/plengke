@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import ScrollToTop from "@/components/scroll-to-top";
 import ScrollAnimationHandler from "@/components/scroll-animation-handler";
 import PageHeader from "@/components/page-header";
+import HeritageBackground from "@/components/heritage-background";
 
 export const revalidate = 10;
 
@@ -39,10 +40,10 @@ export default async function GroceryPage() {
     <>
       <ScrollAnimationHandler />
       <Navigation />
-      <main className="mt-48 mb-20">
+      <HeritageBackground>
         <PageHeader title={title} subtitle={subtitle} />
         <GroceryStore initialItems={transformedItems} />
-      </main>
+      </HeritageBackground>
       <Footer data={rawSiteSettings ?? undefined} />
       <ScrollToTop />
     </>
