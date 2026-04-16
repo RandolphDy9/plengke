@@ -21,7 +21,7 @@ export const grocery = defineType({
           { title: 'Bottled Products', value: 'Bottled Products' },
           { title: 'Coffee/Beverages', value: 'Coffee/Beverages' },
           { title: 'Condiments/Seasonings', value: 'Condiments/Seasonings' },
-          { title: 'Rice/Flour', value: 'Rice/Flour' },
+          { title: 'Rice/Flour/Noodles', value: 'Rice/Flour/Noodles' },
           { title: 'Frozen Items', value: 'Frozen Items' },
           { title: 'Household', value: 'Household' },
           { title: 'Health & Beauty', value: 'Health & Beauty' },
